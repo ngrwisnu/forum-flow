@@ -2,10 +2,10 @@ export interface UserType {
   id: string;
   name: string;
   email: string;
-  avatar: string;
+  avatar?: string;
 }
 
 export type LeaderboardType = {
-  users: UserType;
+  user: UserType;
   score: number;
 };
