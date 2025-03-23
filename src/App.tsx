@@ -1,8 +1,12 @@
+import Button from "./components/ui/Button";
+import Input from "./components/ui/Input";
+
 function App() {
   return (
     <>
       <h1 className="text-3xl font-bold underline">Hello world!</h1>
-      <button className="btn btn-primary">Primary</button>
+      <Button>Login</Button>
+      <Input />
     </>
   );
 }
