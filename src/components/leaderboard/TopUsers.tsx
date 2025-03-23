@@ -1,5 +1,6 @@
 import { LeaderboardType } from "../../types";
 import defaultImage from "../../assets/default-image.webp";
+import { Link } from "react-router-dom";
 
 const TopUsers = ({ data }: { data: LeaderboardType[] }) => {
   return (
@@ -24,6 +25,13 @@ const TopUsers = ({ data }: { data: LeaderboardType[] }) => {
           </div>
         ))}
       </div>
+      <Link
+        to="/leaderboards"
+        role="button"
+        className="btn btn-neutral btn-outline btn-sm mt-4 w-full"
+      >
+        See leaderboards
+      </Link>
     </div>
   );
 };

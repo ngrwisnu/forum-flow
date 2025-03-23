@@ -5,6 +5,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Login from "./pages/Login.tsx";
 import Signup from "./pages/Signup.tsx";
 import RootLayout from "./components/layouts/RootLayout.tsx";
+import Leaderboards from "./pages/Leaderboards.tsx";
 
 const router = createBrowserRouter([
   {
@@ -18,7 +19,12 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <RootLayout />,
-    children: [{}],
+    children: [
+      {
+        path: "leaderboards",
+        element: <Leaderboards />,
+      },
+    ],
   },
 ]);
 
