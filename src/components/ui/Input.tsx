@@ -8,7 +8,7 @@ const Input = ({
   return (
     <input
       className={cn(
-        "input focus:border-none focus:outline-slate-300",
+        "input block w-full focus:border-none focus:outline-slate-300",
         className,
       )}
       {...props}
