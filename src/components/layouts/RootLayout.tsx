@@ -10,7 +10,7 @@ const RootLayout = () => {
 
   return (
     <>
-      <main className="grid min-h-svh w-full grid-cols-[20%_minmax(auto,_1280px)_20%] justify-center divide-x-2 divide-slate-200">
+      <main className="grid min-h-svh w-full grid-cols-[20%_1fr_20%] justify-center divide-x-2 divide-slate-200">
         <div className="">1</div>
         <div className="">
           <Outlet />
