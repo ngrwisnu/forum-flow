@@ -1,8 +1,8 @@
-import { LeaderboardType } from "../../types";
 import defaultImage from "../../assets/default-image.webp";
 import Table, { TableRow } from "../ui/Table";
+import { LeaderboardResponse } from "../../types/leaderboard";
 
-const LeaderboardsTable = ({ data }: { data: LeaderboardType[] }) => {
+const LeaderboardsTable = ({ data }: { data: LeaderboardResponse }) => {
   return (
     <div className="overflow-x-auto">
       <Table>

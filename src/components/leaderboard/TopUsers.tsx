@@ -1,8 +1,8 @@
-import { LeaderboardType } from "../../types";
 import defaultImage from "../../assets/default-image.webp";
 import { Link } from "react-router-dom";
+import { LeaderboardResponse } from "../../types/leaderboard";
 
-const TopUsers = ({ data }: { data: LeaderboardType[] }) => {
+const TopUsers = ({ data }: { data: LeaderboardResponse }) => {
   return (
     <div className="w-full max-w-[250px] bg-transparent p-4">
       <h3 className="mb-3 text-xl font-medium">Top Users</h3>

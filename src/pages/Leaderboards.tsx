@@ -1,11 +1,11 @@
 import Card, { CardContent, CardFooter } from "../components/ui/Card";
 import defaultImage from "../assets/default-image.webp";
 import { leaderboards } from "../data/dummy";
-import { LeaderboardType } from "../types";
 import LeaderboardsTable from "../components/leaderboard/LeaderboardsTable";
+import { LeaderboardResponse } from "../types/leaderboard";
 
 const Leaderboards = () => {
-  const descendedLeaderboards: LeaderboardType[] = leaderboards.sort(
+  const descendedLeaderboards: LeaderboardResponse = leaderboards.sort(
     (a, b) => b.score - a.score,
   );
   const topThree = descendedLeaderboards.slice(0, 3);
