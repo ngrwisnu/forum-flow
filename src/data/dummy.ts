@@ -43,7 +43,7 @@ export const threads: ThreadsResponse = [
   {
     id: "thread-2",
     title: "Thread Kedua",
-    body: "Ini adalah thread kedua",
+    body: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis excepturi quam consectetur optio. Quaerat repellendus similique, rem fugiat veritatis iste minima enim dicta. Dicta illum iusto laborum pariatur, perferendis consectetur dignissimos dolore nihil optio vitae aperiam consequatur numquam, quis sed autem velit dolores ab perspiciatis ducimus. Aspernatur quas nostrum temporibus dolore accusamus laborum autem, fugiat eligendi necessitatibus. Necessitatibus minima a quia commodi numquam dolores. Enim saepe voluptatibus autem iusto eaque debitis obcaecati non perspiciatis. Aut, asperiores ipsam. Consequatur natus quos, asperiores itaque perspiciatis soluta dolor eum accusantium perferendis id saepe. Dolorem incidunt neque aperiam pariatur totam ipsa vitae rem quaerat?",
     category: "Technology",
     createdAt: "2024-12-22T08:30:00.000Z",
     ownerId: "user-2",

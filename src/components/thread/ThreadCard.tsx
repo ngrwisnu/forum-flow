@@ -12,6 +12,8 @@ interface ThreadCardProps extends ThreadType {
 }
 
 const ThreadCard = ({ avatar, name, ...thread }: ThreadCardProps) => {
+  const totalVotes = thread.upVotesBy.length + thread.downVotesBy.length;
+
   return (
     <Card className="p-4">
       <CardHeader className="flex justify-between text-slate-400">
@@ -28,24 +30,33 @@ const ThreadCard = ({ avatar, name, ...thread }: ThreadCardProps) => {
           <div className="text-lg font-bold">{name}</div>
         </div>
         <div className="mt-2 ml-2 w-full">
-          <h6 className="font-bold">{thread.title}</h6>
+          <Link
+            to={`/threads/${thread.id}`}
+            className="font-bold hover:opacity-80"
+          >
+            {thread.title}
+          </Link>
           <p className="text-sm">
             {truncateText(thread.body)}{" "}
-            <Link
-              to={`/threads/${thread.id}`}
-              className="link link-hover link-secondary"
-            >
-              Read more
-            </Link>
+            {thread.body.length >= 250 && (
+              <Link
+                to={`/threads/${thread.id}`}
+                className="link link-hover link-secondary"
+              >
+                Read more
+              </Link>
+            )}
           </p>
         </div>
       </CardContent>
       <CardFooter className="mt-2 flex justify-end gap-3">
         <div className="font-light">
-          <span className="font-bold">3</span> votes
+          <span className="font-bold">{totalVotes}</span>{" "}
+          {totalVotes > 1 ? "votes" : "vote"}
         </div>
         <div className="font-light">
-          <span className="font-bold">2</span> replies
+          <span className="font-bold">{thread.totalComments}</span>{" "}
+          {thread.totalComments > 1 ? "replies" : "reply"}
         </div>
       </CardFooter>
     </Card>
