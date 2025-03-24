@@ -1,12 +1,40 @@
 import { ThreadsResponse } from "../types/thread";
 
+export const users = [
+  {
+    id: "user-1",
+    name: "John Doe",
+    email: "john@example.com",
+  },
+  {
+    id: "user-2",
+    name: "Jane Smith",
+    email: "jane@example.com",
+  },
+  {
+    id: "user-3",
+    name: "Alice Johnson",
+    email: "alice@example.com",
+  },
+  {
+    id: "user-4",
+    name: "Bob Brown",
+    email: "bob@example.com",
+  },
+  {
+    id: "user-5",
+    name: "Charlie Davis",
+    email: "charlie@example.com",
+  },
+];
+
 export const threads: ThreadsResponse = [
   {
     id: "thread-1",
     title: "Thread Pertama",
     body: "Ini adalah thread pertama",
     category: "General",
-    createdAt: "2021-06-21T07:00:00.000Z",
+    createdAt: "2024-06-21T07:00:00.000Z",
     ownerId: "user-1",
     upVotesBy: [],
     downVotesBy: [],
@@ -17,7 +45,7 @@ export const threads: ThreadsResponse = [
     title: "Thread Kedua",
     body: "Ini adalah thread kedua",
     category: "Technology",
-    createdAt: "2021-06-22T08:30:00.000Z",
+    createdAt: "2024-12-22T08:30:00.000Z",
     ownerId: "user-2",
     upVotesBy: ["user-3"],
     downVotesBy: [],
@@ -28,7 +56,7 @@ export const threads: ThreadsResponse = [
     title: "Thread Ketiga",
     body: "Ini adalah thread ketiga",
     category: "Health",
-    createdAt: "2021-06-23T09:15:00.000Z",
+    createdAt: "2025-01-23T09:15:00.000Z",
     ownerId: "user-3",
     upVotesBy: ["user-1", "user-2"],
     downVotesBy: ["user-4"],
@@ -39,7 +67,7 @@ export const threads: ThreadsResponse = [
     title: "Thread Keempat",
     body: "Ini adalah thread keempat",
     category: "Education",
-    createdAt: "2021-06-24T10:45:00.000Z",
+    createdAt: "2024-06-24T10:45:00.000Z",
     ownerId: "user-4",
     upVotesBy: ["user-5"],
     downVotesBy: [],
@@ -50,7 +78,7 @@ export const threads: ThreadsResponse = [
     title: "Thread Kelima",
     body: "Ini adalah thread kelima",
     category: "Entertainment",
-    createdAt: "2021-06-25T11:20:00.000Z",
+    createdAt: "2025-03-23T11:20:00.000Z",
     ownerId: "user-5",
     upVotesBy: [],
     downVotesBy: ["user-2", "user-3"],

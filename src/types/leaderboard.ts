@@ -1,7 +1,7 @@
-import { UserResponse } from "./user";
+import { UserType } from "./user";
 
 export type LeaderboardType = {
-  user: UserResponse;
+  user: UserType;
   score: number;
 };
 
