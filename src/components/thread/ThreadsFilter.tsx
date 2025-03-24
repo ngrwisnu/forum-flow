@@ -6,7 +6,7 @@ import { useSearchParams } from "react-router-dom";
 const ThreadsFilter = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const categories = ["general", "programming", "health"];
+  const categories = ["general", "programming"];
   const sortedCategories = [...categories].sort();
 
   const sortedBy = searchParams.get("sort") || "newest";

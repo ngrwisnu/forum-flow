@@ -8,10 +8,11 @@ import { threadsFilter } from "../helpers/threadsFilter";
 const Threads = () => {
   const [searchParams] = useSearchParams();
 
-  const categoryValue = searchParams.get("category");
+  const sortedByQueryParam = searchParams.get("sort");
+  const categoryQueryParam = searchParams.get("category");
 
-  const filteredThreads = threadsFilter(threads, categoryValue!);
-  const sortedThreads = threadsSorter(filteredThreads);
+  const filteredThreads = threadsFilter(threads, categoryQueryParam!);
+  const sortedThreads = threadsSorter(filteredThreads, sortedByQueryParam!);
   const usersData = users;
 
   return (
