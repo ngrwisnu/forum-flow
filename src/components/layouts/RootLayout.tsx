@@ -15,7 +15,7 @@ const RootLayout = () => {
         <div className="">
           <Outlet />
         </div>
-        <div className="flex flex-col">
+        <div className="sticky top-0 flex max-h-fit min-h-screen flex-col">
           {isLeaderboardPage ? null : (
             <div className="mt-auto mb-20">
               <TopUsers data={descLeaderboards} />
