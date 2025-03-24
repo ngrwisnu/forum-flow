@@ -5,7 +5,4 @@ export interface UserType {
   avatar?: string;
 }
 
-export type LeaderboardType = {
-  user: UserType;
-  score: number;
-};
+export type UserResponse = UserType[];
