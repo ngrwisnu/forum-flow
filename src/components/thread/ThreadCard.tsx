@@ -5,6 +5,7 @@ import { truncateText } from "../../helpers/truncateText";
 import { Link } from "react-router-dom";
 import { ThreadType } from "../../types/thread";
 import { formatCreatedTime } from "../../helpers/formatCreatedTime";
+import { totalVotes } from "../../helpers/vote";
 
 interface ThreadCardProps extends ThreadType {
   avatar?: string;
@@ -12,7 +13,10 @@ interface ThreadCardProps extends ThreadType {
 }
 
 const ThreadCard = ({ avatar, name, ...thread }: ThreadCardProps) => {
-  const totalVotes = thread.upVotesBy.length + thread.downVotesBy.length;
+  const totalVotesValue = totalVotes(
+    thread.upVotesBy.length,
+    thread.downVotesBy.length,
+  );
 
   return (
     <Card className="p-4">
@@ -51,12 +55,12 @@ const ThreadCard = ({ avatar, name, ...thread }: ThreadCardProps) => {
       </CardContent>
       <CardFooter className="mt-2 flex justify-end gap-3">
         <div className="font-light">
-          <span className="font-bold">{totalVotes}</span>{" "}
-          {totalVotes > 1 ? "votes" : "vote"}
+          <span className="font-bold">{totalVotesValue}</span>{" "}
+          {totalVotesValue > 1 ? "votes" : "vote"}
         </div>
         <div className="font-light">
           <span className="font-bold">{thread.totalComments}</span>{" "}
-          {thread.totalComments > 1 ? "comments" : "comment"}
+          {thread.totalComments > 1 ? "comments" : "reply"}
         </div>
       </CardFooter>
     </Card>

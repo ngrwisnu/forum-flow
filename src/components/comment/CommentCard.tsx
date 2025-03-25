@@ -1,23 +1,27 @@
-import { Triangle } from "lucide-react";
 import defaultImage from "../../assets/default-image.webp";
-import Card, { CardContent, CardHeader } from "../../components/ui/Card";
+import { Triangle } from "lucide-react";
 import Button from "../ui/Button";
-import { DetailThreadType } from "../../types/thread";
+import Card, { CardContent, CardHeader } from "../ui/Card";
+import { CommentType } from "../../types/comment";
 import { formatCreatedTime } from "../../helpers/formatCreatedTime";
+import { totalUpVotes } from "../../helpers/vote";
 
-const ThreadDetailCard = ({
-  title,
-  body,
+const CommentCard = ({
+  content,
   owner,
   createdAt,
-}: DetailThreadType) => {
+  upVotesBy,
+  downVotesBy,
+}: CommentType) => {
+  const upVotesValue = totalUpVotes(upVotesBy.length, downVotesBy.length);
+
   return (
-    <Card className="grid grid-cols-[max-content_1fr] p-4">
+    <Card className="grid grid-cols-[max-content_1fr] rounded-none border-b border-slate-300 bg-transparent p-4">
       <div className="col-start-1 col-end-auto flex flex-col items-center justify-center gap-2 pr-4">
         <Button className="flex size-8 items-center justify-center rounded-full border border-slate-900 bg-transparent p-0">
           <Triangle size={14} />
         </Button>
-        <span className="font-semibold">111</span>
+        <span className="font-semibold">{upVotesValue}</span>
         <Button className="flex size-8 rotate-180 items-center justify-center rounded-full border border-slate-900 bg-transparent p-0">
           <Triangle size={14} />
         </Button>
@@ -34,24 +38,16 @@ const ThreadDetailCard = ({
           <div className="text-slate-400">
             posted{" "}
             <span className="font-medium text-slate-900">
-              {formatCreatedTime(createdAt!)}
+              {formatCreatedTime(createdAt)}
             </span>
           </div>
         </CardHeader>
         <CardContent className="ml-2 py-2">
-          <h1 className="mb-2 text-xl font-bold">{title}</h1>
-          <p>{body}</p>
+          <p>{content}</p>
         </CardContent>
-      </div>
-      <div className="col-start-1 -col-end-1 border-t border-slate-200 py-3">
-        <h2 className="text-lg">Write your comment</h2>
-        <div id="editor" className=""></div>
-        <div className="flex justify-end">
-          <Button className="btn-secondary">Post comment</Button>
-        </div>
       </div>
     </Card>
   );
 };
 
-export default ThreadDetailCard;
+export default CommentCard;

@@ -191,6 +191,17 @@ export const detailThread: DetailThreadType = {
         name: "John Doe",
       },
       upVotesBy: [],
+      downVotesBy: ["user-3"],
+    },
+    {
+      id: "comment-2",
+      content: "Ini adalah komentar kedua",
+      createdAt: "2025-01-21T07:00:00.000Z",
+      owner: {
+        id: "user-1",
+        name: "John Doe",
+      },
+      upVotesBy: ["user-1", "user-2"],
       downVotesBy: [],
     },
   ],
