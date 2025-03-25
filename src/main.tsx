@@ -7,6 +7,7 @@ import Signup from "./pages/Signup.tsx";
 import RootLayout from "./components/layouts/RootLayout.tsx";
 import Leaderboards from "./pages/Leaderboards.tsx";
 import Threads from "./pages/Threads.tsx";
+import ThreadDetail from "./pages/ThreadDetail.tsx";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Threads />,
+      },
+      {
+        path: "threads/:threadId",
+        element: <ThreadDetail />,
       },
       {
         path: "leaderboards",

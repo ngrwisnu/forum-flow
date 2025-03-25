@@ -23,11 +23,7 @@ export const CardFooter = ({
 };
 
 const Card = ({ children, className }: HTMLAttributes<HTMLDivElement>) => {
-  return (
-    <div className={cn("card bg-base-100 shadow-sm", className)}>
-      {children}
-    </div>
-  );
+  return <div className={cn("card bg-base-100", className)}>{children}</div>;
 };
 
 export default Card;
