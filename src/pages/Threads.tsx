@@ -1,9 +1,10 @@
 import ThreadCard from "../components/thread/ThreadCard";
-import { threadsSorter } from "../helpers/threadsSorter";
 import { threads, users } from "../data/dummy";
 import ThreadsFilter from "../components/thread/ThreadsFilter";
 import { useSearchParams } from "react-router-dom";
 import { threadsFilter } from "../helpers/threadsFilter";
+import { itemsSorter } from "../helpers/itemsSorter";
+import { totalVotes } from "../helpers/vote";
 
 const Threads = () => {
   const [searchParams] = useSearchParams();
@@ -12,7 +13,11 @@ const Threads = () => {
   const categoryQueryParam = searchParams.get("category") || "all";
 
   const filteredThreads = threadsFilter(threads, categoryQueryParam);
-  const sortedThreads = threadsSorter(filteredThreads, sortedByQueryParam);
+  const sortedThreads = itemsSorter(
+    filteredThreads,
+    sortedByQueryParam as "newest" | "highest_votes",
+    totalVotes,
+  );
   const usersData = users;
 
   return (
@@ -20,7 +25,7 @@ const Threads = () => {
       <h1 className="mb-6 text-4xl font-bold">Discussions</h1>
       <ThreadsFilter />
       <div className="flex flex-col gap-4">
-        {sortedThreads.length === 0 && (
+        {!sortedThreads.length && (
           <p className="text-center">No results found</p>
         )}
         {sortedThreads.map((thread) => {

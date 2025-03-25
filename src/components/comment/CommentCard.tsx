@@ -18,11 +18,11 @@ const CommentCard = ({
   return (
     <Card className="grid grid-cols-[max-content_1fr] rounded-none border-b border-slate-300 bg-transparent p-4">
       <div className="col-start-1 col-end-auto flex flex-col items-center justify-center gap-2 pr-4">
-        <Button className="flex size-8 items-center justify-center rounded-full border border-slate-900 bg-transparent p-0">
+        <Button className="flex size-8 items-center justify-center rounded-full border border-slate-400 bg-transparent p-0 text-slate-400">
           <Triangle size={14} />
         </Button>
         <span className="font-semibold">{upVotesValue}</span>
-        <Button className="flex size-8 rotate-180 items-center justify-center rounded-full border border-slate-900 bg-transparent p-0">
+        <Button className="flex size-8 rotate-180 items-center justify-center rounded-full border border-slate-400 bg-transparent p-0 text-slate-400">
           <Triangle size={14} />
         </Button>
       </div>
@@ -33,9 +33,9 @@ const CommentCard = ({
             <div className="size-8 overflow-hidden rounded-full">
               <img src={owner.avatar || defaultImage} alt="profile" />
             </div>
-            <div className="text-base">{owner.name}</div>
+            <div className="text-sm">{owner.name}</div>
           </div>
-          <div className="text-slate-400">
+          <div className="text-sm text-slate-400">
             posted{" "}
             <span className="font-medium text-slate-900">
               {formatCreatedTime(createdAt)}
