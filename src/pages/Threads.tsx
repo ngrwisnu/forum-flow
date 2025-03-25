@@ -5,6 +5,7 @@ import { useSearchParams } from "react-router-dom";
 import { threadsFilter } from "../helpers/threadsFilter";
 import { itemsSorter } from "../helpers/itemsSorter";
 import { totalVotes } from "../helpers/vote";
+import Button from "../components/ui/Button";
 
 const Threads = () => {
   const [searchParams] = useSearchParams();
@@ -22,7 +23,10 @@ const Threads = () => {
 
   return (
     <div className="w-full p-4">
-      <h1 className="mb-6 text-4xl font-bold">Discussions</h1>
+      <div className="mb-6 border-b border-slate-200 pb-3">
+        <h1 className="mb-3 text-4xl font-bold">Discussions</h1>
+        <Button className="btn-secondary">Create new discussion</Button>
+      </div>
       <ThreadsFilter />
       <div className="flex flex-col gap-4">
         {!sortedThreads.length && (
