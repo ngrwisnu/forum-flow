@@ -1,3 +1,6 @@
+import { CommentType } from "./comment";
+import { UserType } from "./user";
+
 export interface ThreadType {
   id: string;
   title: string;
@@ -11,3 +14,8 @@ export interface ThreadType {
 }
 
 export type ThreadsResponse = ThreadType[];
+
+export interface DetailThreadType extends Partial<ThreadType> {
+  owner: Partial<UserType>;
+  comments: CommentType[];
+}

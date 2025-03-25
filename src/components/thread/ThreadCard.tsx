@@ -56,7 +56,7 @@ const ThreadCard = ({ avatar, name, ...thread }: ThreadCardProps) => {
         </div>
         <div className="font-light">
           <span className="font-bold">{thread.totalComments}</span>{" "}
-          {thread.totalComments > 1 ? "replies" : "reply"}
+          {thread.totalComments > 1 ? "comments" : "comment"}
         </div>
       </CardFooter>
     </Card>

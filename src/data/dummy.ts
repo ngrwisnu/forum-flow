@@ -1,4 +1,4 @@
-import { ThreadsResponse } from "../types/thread";
+import { DetailThreadType, ThreadsResponse } from "../types/thread";
 
 export const users = [
   {
@@ -168,3 +168,30 @@ export const leaderboards = [
     score: 35,
   },
 ];
+
+export const detailThread: DetailThreadType = {
+  id: "thread-1",
+  title: "Thread Pertama",
+  body: "Ini adalah thread pertama",
+  category: "General",
+  createdAt: "2021-06-21T07:00:00.000Z",
+  owner: {
+    id: "user-1",
+    name: "John Doe",
+  },
+  upVotesBy: [],
+  downVotesBy: [],
+  comments: [
+    {
+      id: "comment-1",
+      content: "Ini adalah komentar pertama",
+      createdAt: "2021-06-21T07:00:00.000Z",
+      owner: {
+        id: "user-1",
+        name: "John Doe",
+      },
+      upVotesBy: [],
+      downVotesBy: [],
+    },
+  ],
+};
