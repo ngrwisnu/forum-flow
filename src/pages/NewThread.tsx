@@ -1,4 +1,4 @@
-import { FormItem } from "../components/form/Form";
+import { FormItem } from "../components/ui/Form";
 import Button from "../components/ui/Button";
 import Editor from "../components/ui/Editor";
 import Input from "../components/ui/Input";
