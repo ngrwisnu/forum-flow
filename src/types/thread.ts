@@ -20,3 +20,9 @@ export interface DetailThreadType
   owner: Partial<UserType>;
   comments: CommentType[];
 }
+
+export interface NewThreadRequest {
+  title: string;
+  category: string;
+  body: string;
+}
