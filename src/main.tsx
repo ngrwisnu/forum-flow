@@ -8,6 +8,7 @@ import RootLayout from "./components/layouts/RootLayout.tsx";
 import Leaderboards from "./pages/Leaderboards.tsx";
 import Threads from "./pages/Threads.tsx";
 import ThreadDetail from "./pages/ThreadDetail.tsx";
+import NewThread from "./pages/NewThread.tsx";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
       {
         path: "threads/:threadId",
         element: <ThreadDetail />,
+      },
+      {
+        path: "threads/create",
+        element: <NewThread />,
       },
       {
         path: "leaderboards",

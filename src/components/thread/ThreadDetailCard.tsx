@@ -5,6 +5,7 @@ import Button from "../ui/Button";
 import { DetailThreadType } from "../../types/thread";
 import { formatCreatedTime } from "../../helpers/formatCreatedTime";
 import { totalUpVotes } from "../../helpers/vote";
+import Editor from "../ui/Editor";
 
 const ThreadDetailCard = ({
   title,
@@ -50,12 +51,7 @@ const ThreadDetailCard = ({
       </div>
       <div className="col-start-1 -col-end-1 border-t border-slate-200 py-3">
         <h2 className="my-3 text-lg">Write your comment</h2>
-        <div
-          id="editor"
-          className="rich-editor min-h-60 rounded-lg border border-slate-200 p-4"
-          data-placeholder="Write your comment here..."
-          contentEditable
-        ></div>
+        <Editor placeholder="Write your comment here..." />
         <div className="mt-3 flex justify-end">
           <Button className="btn-secondary">Post comment</Button>
         </div>

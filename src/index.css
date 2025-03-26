@@ -21,7 +21,7 @@ body {
   @apply bg-slate-100;
 }
 
-#editor.rich-editor:empty::before {
+.rich-editor:empty::before {
   content: attr(data-placeholder);
   color: #a0aec0;
   font-size: 1rem;
