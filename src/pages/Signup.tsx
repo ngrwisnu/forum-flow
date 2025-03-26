@@ -1,12 +1,9 @@
 import { Link } from "react-router-dom";
 import SignUpForm from "../components/auth/SignUpForm";
+import { SignupRequest } from "../types/auth";
 
 const Signup = () => {
-  const signUpHandler = (data: {
-    name: string;
-    email: string;
-    password: string;
-  }) => {
+  const signUpHandler = (data: SignupRequest) => {
     console.log(data);
   };
 

@@ -2,17 +2,10 @@ import { useState } from "react";
 import Button from "../ui/Button";
 import { FormItem } from "../ui/Form";
 import Input from "../ui/Input";
+import { SignupRequest } from "../../types/auth";
 
 interface SignUpFormProps {
-  onSubmit: ({
-    name,
-    email,
-    password,
-  }: {
-    name: string;
-    email: string;
-    password: string;
-  }) => void;
+  onSubmit: ({ name, email, password }: SignupRequest) => void;
 }
 
 const SignUpForm = ({ onSubmit }: SignUpFormProps) => {
