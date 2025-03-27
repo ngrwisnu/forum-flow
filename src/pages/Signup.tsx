@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import SignUpForm from "../components/auth/SignUpForm";
 import { SignupRequest } from "../types/auth";
 import { useDispatch } from "react-redux";
@@ -6,10 +6,18 @@ import type { AppDispatch } from "../store";
 import { asyncUserSignup } from "../store/auth/action";
 
 const Signup = () => {
+  const navigate = useNavigate();
+
   const dispatch = useDispatch<AppDispatch>();
 
-  const signUpHandler = (data: SignupRequest) => {
-    dispatch(asyncUserSignup(data));
+  const signUpHandler = async (data: SignupRequest) => {
+    const response = await dispatch(asyncUserSignup(data)).unwrap();
+
+    if (!response) {
+      return;
+    }
+
+    navigate("/login");
   };
 
   return (

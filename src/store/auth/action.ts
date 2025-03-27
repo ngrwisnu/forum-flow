@@ -7,19 +7,18 @@ import {
 } from "../../utils/api/auth";
 import { LoginRequest, SignupRequest } from "../../types/auth";
 import { getUserProfile } from "../../utils/api/user";
-import { userLogin, userLogout, userSignup } from "./slice";
+import { userLogin, userLogout } from "./slice";
 
 export const asyncUserSignup = createAsyncThunk(
   "auth/asyncUserSignup",
-  async ({ name, email, password }: SignupRequest, { dispatch }) => {
+  async ({ name, email, password }: SignupRequest) => {
     const response = await register({ name, email, password });
 
     if (response.isError) {
-      dispatch(userSignup(false));
       alert(response.message);
     }
 
-    dispatch(userSignup(true));
+    return response.data;
   },
 );
 
