@@ -1,15 +1,23 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import LoginForm from "../components/auth/LoginForm";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { asyncUserLogin } from "../store/auth/action";
-import { AppDispatch } from "../store";
+import { AppDispatch, RootState } from "../store";
+import { useEffect } from "react";
 
 const Login = () => {
+  const navigate = useNavigate();
+
+  const { auth } = useSelector((state: RootState) => state);
   const dispatch = useDispatch<AppDispatch>();
 
-  const loginHandler = (email: string, password: string) => {
-    console.log({ email, password });
+  useEffect(() => {
+    if (auth.user) {
+      navigate("/");
+    }
+  }, [auth.user, navigate]);
 
+  const loginHandler = (email: string, password: string) => {
     dispatch(asyncUserLogin({ email, password }));
   };
 

@@ -1,10 +1,15 @@
 import { Link } from "react-router-dom";
 import SignUpForm from "../components/auth/SignUpForm";
 import { SignupRequest } from "../types/auth";
+import { useDispatch } from "react-redux";
+import type { AppDispatch } from "../store";
+import { asyncUserSignup } from "../store/auth/action";
 
 const Signup = () => {
+  const dispatch = useDispatch<AppDispatch>();
+
   const signUpHandler = (data: SignupRequest) => {
-    console.log(data);
+    dispatch(asyncUserSignup(data));
   };
 
   return (
