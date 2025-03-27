@@ -1,4 +1,4 @@
-import { getAccessToken } from "./auth";
+import { getAccessToken } from "./auths";
 import callAPI, { BASE_URL } from "./callAPI";
 
 export async function getUserProfile() {
@@ -7,5 +7,13 @@ export async function getUserProfile() {
   return callAPI({
     url,
     token: getAccessToken(),
+  });
+}
+
+export async function getAllUsers() {
+  const url = `${BASE_URL}/users`;
+
+  return callAPI({
+    url,
   });
 }

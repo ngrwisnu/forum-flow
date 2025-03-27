@@ -4,9 +4,9 @@ import {
   register,
   updateTokenInStorage,
   updateUserDetailsInStorage,
-} from "../../utils/api/auth";
+} from "../../utils/apis/auths";
 import { LoginRequest, SignupRequest } from "../../types/auth";
-import { getUserProfile } from "../../utils/api/user";
+import { getUserProfile } from "../../utils/apis/users";
 import { userLogin, userLogout } from "./slice";
 
 export const asyncUserSignup = createAsyncThunk(

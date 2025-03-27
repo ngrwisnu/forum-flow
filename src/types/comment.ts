@@ -8,3 +8,7 @@ export interface CommentType {
   downVotesBy: string[];
   owner: Partial<UserType>;
 }
+
+export interface CreateCommentRequest {
+  content: string;
+}
