@@ -9,6 +9,8 @@ import Leaderboards from "./pages/Leaderboards.tsx";
 import Threads from "./pages/Threads.tsx";
 import ThreadDetail from "./pages/ThreadDetail.tsx";
 import NewThread from "./pages/NewThread.tsx";
+import { Provider } from "react-redux";
+import store from "./store/index.ts";
 
 const router = createBrowserRouter([
   {
@@ -44,7 +46,9 @@ const router = createBrowserRouter([
 ]);
 
 createRoot(document.getElementById("root")!).render(
-  <StrictMode>
-    <RouterProvider router={router} />
-  </StrictMode>,
+  <Provider store={store}>
+    <StrictMode>
+      <RouterProvider router={router} />
+    </StrictMode>
+  </Provider>,
 );

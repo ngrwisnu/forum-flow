@@ -1,9 +1,16 @@
 import { Link } from "react-router-dom";
 import LoginForm from "../components/auth/LoginForm";
+import { useDispatch } from "react-redux";
+import { asyncUserLogin } from "../store/auth/action";
+import { AppDispatch } from "../store";
 
 const Login = () => {
+  const dispatch = useDispatch<AppDispatch>();
+
   const loginHandler = (email: string, password: string) => {
     console.log({ email, password });
+
+    dispatch(asyncUserLogin({ email, password }));
   };
 
   return (

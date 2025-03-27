@@ -36,4 +36,6 @@ const callAPI = async ({
 
 export default callAPI;
 
+export const BASE_URL = import.meta.env.VITE_BASE_URL;
+
 export type CallAPIResponse = ReturnType<typeof callAPI>;

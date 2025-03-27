@@ -1,22 +1,20 @@
 import { SignupRequest } from "../../types/auth";
 import { UserType } from "../../types/user";
-import callAPI, { CallAPIResponse } from "./callAPI";
+import callAPI, { BASE_URL, CallAPIResponse } from "./callAPI";
 
-const BASE_URL = import.meta.env.VITE_BASE_URL;
-
-function getAccessToken() {
+export function getAccessToken() {
   return localStorage.getItem("accessToken");
 }
 
-export function saveAccessToken(accessToken: string) {
+export function updateTokenInStorage(accessToken: string) {
   return localStorage.setItem("accessToken", accessToken);
 }
 
-export function saveUserDetails(data: UserType) {
+export function updateUserDetailsInStorage(data: UserType | object) {
   return localStorage.setItem("user", JSON.stringify(data));
 }
 
-export function getUserDetails(): UserType | null {
+export function getUserFromStorage(): UserType | null {
   const user = localStorage.getItem("user");
 
   if (!user) {
