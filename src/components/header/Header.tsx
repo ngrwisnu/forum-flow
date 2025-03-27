@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import logo from "../../assets/horizontal.png";
+import defaultImage from "../../assets/default-image.webp";
 import { AlignLeft } from "lucide-react";
 
 const Header = () => {
@@ -36,10 +37,19 @@ const Header = () => {
           </ul>
         </div>
       </div>
-      <div className="navbar-end">
-        <Link to="/login" className="btn btn-outline">
-          Login
-        </Link>
+
+      <div className="flex flex-1 items-center justify-end gap-5">
+        <div className="flex items-center gap-3">
+          <div className="">John Doe</div>
+          <div className="size-8 overflow-hidden rounded-full">
+            <img src={defaultImage} alt="profile-pic" />
+          </div>
+        </div>
+        <div className="grow-0">
+          <Link to="/login" className="btn btn-outline">
+            Login
+          </Link>
+        </div>
       </div>
     </header>
   );

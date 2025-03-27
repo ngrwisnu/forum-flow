@@ -28,15 +28,15 @@ const ThreadCard = ({ avatar, name, ...thread }: ThreadCardProps) => {
       </CardHeader>
       <CardContent className="mt-2">
         <div className="flex w-full items-center gap-2">
-          <div className="size-12 overflow-hidden rounded-full">
+          <div className="size-8 overflow-hidden rounded-full">
             <img src={avatar || defaultImage} alt="profile" />
           </div>
-          <div className="text-lg font-bold">{name}</div>
+          <div className="text-base font-medium">{name}</div>
         </div>
         <div className="mt-2 ml-2 w-full">
           <Link
             to={`/threads/${thread.id}`}
-            className="font-bold hover:opacity-80"
+            className="text-lg font-bold hover:opacity-80"
           >
             {thread.title}
           </Link>
