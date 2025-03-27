@@ -1,7 +1,20 @@
+import { useSelector } from "react-redux";
 import NewThreadForm from "../components/thread/NewThreadForm";
 import { NewThreadRequest } from "../types/thread";
+import { RootState } from "../store";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const NewThread = () => {
+  const { auth } = useSelector((state: RootState) => state);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!auth.user) {
+      navigate("/login");
+    }
+  }, [auth.user, navigate]);
+
   const submitHander = (data: NewThreadRequest) => {
     console.log(data);
   };

@@ -1,19 +1,13 @@
 import ThreadCard from "../components/thread/ThreadCard";
 import { threads, users } from "../data/dummy";
 import ThreadsFilter from "../components/thread/ThreadsFilter";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { threadsFilter } from "../helpers/threadsFilter";
 import { itemsSorter } from "../helpers/itemsSorter";
 import { totalVotes } from "../helpers/vote";
-import Button from "../components/ui/Button";
 
 const Threads = () => {
-  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-
-  const createThreadHandler = () => {
-    navigate("/threads/create");
-  };
 
   const sortedByQueryParam = searchParams.get("sort") || "newest";
   const categoryQueryParam = searchParams.get("category") || "all";
@@ -30,9 +24,9 @@ const Threads = () => {
     <div className="w-full p-4">
       <div className="mb-6 border-b border-slate-200 pb-3">
         <h1 className="mb-3 text-4xl font-bold">Discussions</h1>
-        <Button className="btn-secondary" onClick={createThreadHandler}>
+        <Link to="/threads/create" className="btn btn-secondary">
           Create new discussion
-        </Button>
+        </Link>
       </div>
       <ThreadsFilter />
       <div className="flex flex-col gap-4">
