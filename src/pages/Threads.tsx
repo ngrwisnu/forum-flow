@@ -1,24 +1,35 @@
 import ThreadCard from "../components/thread/ThreadCard";
-import { threads, users } from "../data/dummy";
 import ThreadsFilter from "../components/thread/ThreadsFilter";
 import { Link, useSearchParams } from "react-router-dom";
 import { threadsFilter } from "../helpers/threadsFilter";
 import { itemsSorter } from "../helpers/itemsSorter";
 import { totalVotes } from "../helpers/vote";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../store";
+import { useEffect } from "react";
+import { asyncGetThreads } from "../store/thread/action";
+import { asyncGetUsers } from "../store/users/action";
 
 const Threads = () => {
+  const dispatch = useDispatch<AppDispatch>();
+  const { thread, users } = useSelector((state: RootState) => state);
+
+  useEffect(() => {
+    dispatch(asyncGetThreads());
+    dispatch(asyncGetUsers());
+  }, [dispatch]);
+
   const [searchParams] = useSearchParams();
 
   const sortedByQueryParam = searchParams.get("sort") || "newest";
   const categoryQueryParam = searchParams.get("category") || "all";
 
-  const filteredThreads = threadsFilter(threads, categoryQueryParam);
+  const filteredThreads = threadsFilter(thread.threads, categoryQueryParam);
   const sortedThreads = itemsSorter(
     filteredThreads,
     sortedByQueryParam as "newest" | "highest_votes",
     totalVotes,
   );
-  const usersData = users;
 
   return (
     <div className="w-full p-4">
@@ -34,9 +45,16 @@ const Threads = () => {
           <p className="text-center">No results found</p>
         )}
         {sortedThreads.map((thread) => {
-          const user = usersData.find((user) => user.id === thread.ownerId)!;
+          const user = users.users.find((user) => user.id === thread.ownerId)!;
 
-          return <ThreadCard key={thread.id} {...thread} name={user?.name} />;
+          return (
+            <ThreadCard
+              key={thread.id}
+              {...thread}
+              avatar={user?.avatar}
+              name={user?.name}
+            />
+          );
         })}
       </div>
     </div>

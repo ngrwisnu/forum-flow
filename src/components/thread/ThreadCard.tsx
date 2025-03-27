@@ -21,10 +21,10 @@ const ThreadCard = ({ avatar, name, ...thread }: ThreadCardProps) => {
   return (
     <Card className="p-4">
       <CardHeader className="flex justify-between text-slate-400">
-        <div className="">
+        <div>
           Category: <Badge className="badge-neutral">{thread.category}</Badge>
         </div>
-        <div className="">{formatCreatedTime(thread.createdAt)}</div>
+        <div>{formatCreatedTime(thread.createdAt)}</div>
       </CardHeader>
       <CardContent className="mt-2">
         <div className="flex w-full items-center gap-2">
