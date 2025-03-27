@@ -2,8 +2,23 @@ import { Link } from "react-router-dom";
 import logo from "../../assets/horizontal.png";
 import defaultImage from "../../assets/default-image.webp";
 import { AlignLeft } from "lucide-react";
+import type { UserType } from "../../types/user";
+import Button from "../ui/Button";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../store";
+import { asyncUserLogout } from "../../store/auth/action";
 
-const Header = () => {
+interface HeaderProps {
+  user: UserType | null;
+}
+
+const Header = ({ user }: HeaderProps) => {
+  const dispatch = useDispatch<AppDispatch>();
+
+  const logoutHandler = () => {
+    dispatch(asyncUserLogout());
+  };
+
   return (
     <header className="navbar bg-base-100 shadow-sm">
       <div className="flex flex-1 items-center justify-start">
@@ -40,15 +55,22 @@ const Header = () => {
 
       <div className="flex flex-1 items-center justify-end gap-5">
         <div className="flex items-center gap-3">
-          <div className="">John Doe</div>
+          <div>{user?.name}</div>
           <div className="size-8 overflow-hidden rounded-full">
-            <img src={defaultImage} alt="profile-pic" />
+            <img src={user?.avatar || defaultImage} alt="profile-pic" />
           </div>
         </div>
         <div className="grow-0">
-          <Link to="/login" className="btn btn-outline">
-            Login
-          </Link>
+          {!user && (
+            <Link to="/login" className="btn btn-outline">
+              Login
+            </Link>
+          )}
+          {user && (
+            <Button className="btn-outline" onClick={logoutHandler}>
+              Logout
+            </Button>
+          )}
         </div>
       </div>
     </header>
