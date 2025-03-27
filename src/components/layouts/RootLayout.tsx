@@ -1,17 +1,25 @@
 import TopUsers from "../leaderboard/TopUsers";
-import { leaderboards } from "../../data/dummy.ts";
 import { Outlet, useLocation } from "react-router-dom";
 import Header from "../header/Header.tsx";
-import { RootState } from "../../store/index.ts";
-import { useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../store/index.ts";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { asyncGetLeaderboard } from "../../store/leaderboard/action.ts";
 
 const RootLayout = () => {
-  const { auth } = useSelector((state: RootState) => state);
+  const dispatch = useDispatch<AppDispatch>();
+  const { auth, leaderboard } = useSelector((state: RootState) => state);
+
+  useEffect(() => {
+    dispatch(asyncGetLeaderboard());
+  }, [dispatch]);
 
   const location = useLocation();
   const isLeaderboardPage = location.pathname === "/leaderboards";
 
-  const descLeaderboards = leaderboards.sort((a, b) => b.score - a.score);
+  const sortedLeaderboard = [...leaderboard.leaderboard].sort(
+    (a, b) => b.score - a.score,
+  );
 
   return (
     <>
@@ -24,7 +32,7 @@ const RootLayout = () => {
         <div className="sticky top-0 flex max-h-fit min-h-screen flex-col">
           {isLeaderboardPage ? null : (
             <div className="mt-auto mb-20">
-              <TopUsers data={descLeaderboards} />
+              <TopUsers data={sortedLeaderboard} />
             </div>
           )}
         </div>
