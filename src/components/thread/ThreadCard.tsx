@@ -41,7 +41,7 @@ const ThreadCard = ({ avatar, name, ...thread }: ThreadCardProps) => {
           >
             {thread.title}
           </Link>
-          <p className="text-sm">
+          <div className="text-sm">
             {parse(truncateText(thread.body))}{" "}
             {thread.body.length >= 250 && (
               <Link
@@ -51,7 +51,7 @@ const ThreadCard = ({ avatar, name, ...thread }: ThreadCardProps) => {
                 Read more
               </Link>
             )}
-          </p>
+          </div>
         </div>
       </CardContent>
       <CardFooter className="mt-2 flex justify-end gap-3">

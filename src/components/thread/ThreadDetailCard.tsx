@@ -46,7 +46,7 @@ const ThreadDetailCard = ({
         </CardHeader>
         <CardContent className="ml-2 py-2">
           <h1 className="mb-2 text-xl font-bold">{title}</h1>
-          <p>{parse(body)}</p>
+          <div>{parse(body)}</div>
         </CardContent>
       </div>
     </Card>
