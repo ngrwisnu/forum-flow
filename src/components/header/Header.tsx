@@ -10,9 +10,10 @@ import { asyncUserLogout } from "../../store/auth/action";
 
 interface HeaderProps {
   user: UserType | null;
+  isAuthenticated: boolean;
 }
 
-const Header = ({ user }: HeaderProps) => {
+const Header = ({ user, isAuthenticated }: HeaderProps) => {
   const dispatch = useDispatch<AppDispatch>();
 
   const logoutHandler = () => {
@@ -54,12 +55,14 @@ const Header = ({ user }: HeaderProps) => {
       </div>
 
       <div className="flex flex-1 items-center justify-end gap-5">
-        <div className="flex items-center gap-3">
-          <div>{user?.name}</div>
-          <div className="size-8 overflow-hidden rounded-full">
-            <img src={user?.avatar || defaultImage} alt="profile-pic" />
+        {isAuthenticated && (
+          <div className="flex items-center gap-3">
+            <div>{user?.name}</div>
+            <div className="size-8 overflow-hidden rounded-full">
+              <img src={user?.avatar || defaultImage} alt="profile-pic" />
+            </div>
           </div>
-        </div>
+        )}
         <div className="grow-0">
           {!user && (
             <Link to="/login" className="btn btn-outline">

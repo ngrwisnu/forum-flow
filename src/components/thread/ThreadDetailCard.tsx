@@ -5,7 +5,6 @@ import Button from "../ui/Button";
 import { DetailThreadType } from "../../types/thread";
 import { formatCreatedTime } from "../../helpers/formatCreatedTime";
 import { totalUpVotes } from "../../helpers/vote";
-import CommentForm from "../comment/CommentForm";
 
 const ThreadDetailCard = ({
   title,
@@ -15,12 +14,8 @@ const ThreadDetailCard = ({
   upVotesBy,
   downVotesBy,
 }: DetailThreadType) => {
-  const submitCommentHandler = (content: string) => {
-    console.log(content);
-  };
-
   return (
-    <Card className="grid grid-cols-[max-content_1fr] p-4">
+    <Card className="grid grid-cols-[max-content_1fr]">
       <div className="col-start-1 col-end-auto flex flex-col items-center justify-center gap-2 pr-4">
         <Button className="flex size-8 items-center justify-center rounded-full border border-slate-400 bg-transparent p-0 text-slate-400">
           <Triangle size={14} />
@@ -52,10 +47,6 @@ const ThreadDetailCard = ({
           <h1 className="mb-2 text-xl font-bold">{title}</h1>
           <p>{body}</p>
         </CardContent>
-      </div>
-      <div className="col-start-1 -col-end-1 border-t border-slate-200 py-3">
-        <h2 className="my-3 text-lg">Write your comment</h2>
-        <CommentForm onSubmit={submitCommentHandler} />
       </div>
     </Card>
   );

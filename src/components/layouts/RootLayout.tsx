@@ -23,7 +23,7 @@ const RootLayout = () => {
 
   return (
     <>
-      <Header user={auth.user} />
+      <Header isAuthenticated={auth.isAuthenticated} user={auth.user} />
       <main className="grid min-h-svh w-full grid-cols-[20%_1fr_20%] justify-center divide-x-2 divide-slate-200">
         <div></div>
         <div>
