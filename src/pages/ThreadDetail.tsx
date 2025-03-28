@@ -9,8 +9,10 @@ import { AppDispatch, RootState } from "../store";
 import { Link, useParams } from "react-router-dom";
 import { asyncGetThreadDetails } from "../store/thread/action";
 import CommentForm from "../components/comment/CommentForm";
+import { createComment } from "../utils/apis/comment";
 
 const ThreadDetail = () => {
+  const [refresh, setRefresh] = useState(false);
   const [sortCommentBy, setSortCommentBy] = useState<
     "newest" | "highest_votes"
   >("highest_votes");
@@ -22,14 +24,20 @@ const ThreadDetail = () => {
 
   useEffect(() => {
     dispatch(asyncGetThreadDetails(threadId as string));
-  }, [dispatch, threadId]);
+  }, [dispatch, threadId, refresh]);
 
   const commentSorterHandler = (e: ChangeEvent<HTMLSelectElement>) => {
     setSortCommentBy(e.target.value as "newest" | "highest_votes");
   };
 
-  const submitCommentHandler = (content: string) => {
-    console.log(content);
+  const submitCommentHandler = async (content: string) => {
+    const response = await createComment(threadId!, { content });
+
+    if (response.isError) {
+      alert(response.message);
+    }
+
+    setRefresh((prevState) => !prevState);
   };
 
   const sortedComments = itemsSorter(

@@ -1,14 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { UserType } from "../../types/user";
-import { getAccessToken } from "../../utils/apis/auths";
+import { getAccessToken, getUserFromStorage } from "../../utils/apis/auths";
 
 const isAuthenticated = !!getAccessToken();
+const authenticatedUser = getUserFromStorage();
 
 const initialState: {
   user: UserType | null;
   isAuthenticated: boolean;
 } = {
-  user: null,
+  user: authenticatedUser,
   isAuthenticated,
 };
 

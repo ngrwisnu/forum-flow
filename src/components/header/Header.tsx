@@ -64,12 +64,12 @@ const Header = ({ user, isAuthenticated }: HeaderProps) => {
           </div>
         )}
         <div className="grow-0">
-          {!user && (
+          {!isAuthenticated && (
             <Link to="/login" className="btn btn-outline">
               Login
             </Link>
           )}
-          {user && (
+          {isAuthenticated && (
             <Button className="btn-outline" onClick={logoutHandler}>
               Logout
             </Button>

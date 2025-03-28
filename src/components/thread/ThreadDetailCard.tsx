@@ -5,6 +5,7 @@ import Button from "../ui/Button";
 import { DetailThreadType } from "../../types/thread";
 import { formatCreatedTime } from "../../helpers/formatCreatedTime";
 import { totalUpVotes } from "../../helpers/vote";
+import parse from "html-react-parser";
 
 const ThreadDetailCard = ({
   title,
@@ -45,7 +46,7 @@ const ThreadDetailCard = ({
         </CardHeader>
         <CardContent className="ml-2 py-2">
           <h1 className="mb-2 text-xl font-bold">{title}</h1>
-          <p>{body}</p>
+          <p>{parse(body)}</p>
         </CardContent>
       </div>
     </Card>

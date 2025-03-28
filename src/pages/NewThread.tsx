@@ -4,6 +4,7 @@ import { NewThreadRequest } from "../types/thread";
 import { RootState } from "../store";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { createThread } from "../utils/apis/threads";
 
 const NewThread = () => {
   const { auth } = useSelector((state: RootState) => state);
@@ -15,8 +16,14 @@ const NewThread = () => {
     }
   }, [auth.user, navigate]);
 
-  const submitHander = (data: NewThreadRequest) => {
-    console.log(data);
+  const submitHander = async (data: NewThreadRequest) => {
+    const response = await createThread(data);
+
+    if (response.isError) {
+      alert(response.message);
+    }
+
+    navigate("/");
   };
 
   const categories = ["general", "programming"];

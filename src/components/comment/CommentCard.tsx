@@ -5,6 +5,7 @@ import Card, { CardContent, CardHeader } from "../ui/Card";
 import { CommentType } from "../../types/comment";
 import { formatCreatedTime } from "../../helpers/formatCreatedTime";
 import { totalUpVotes } from "../../helpers/vote";
+import parse from "html-react-parser";
 
 const CommentCard = ({
   content,
@@ -43,7 +44,7 @@ const CommentCard = ({
           </div>
         </CardHeader>
         <CardContent className="ml-2 py-2">
-          <p>{content}</p>
+          <p>{parse(content)}</p>
         </CardContent>
       </div>
     </Card>

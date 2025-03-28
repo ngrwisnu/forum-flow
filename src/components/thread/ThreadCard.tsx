@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { ThreadType } from "../../types/thread";
 import { formatCreatedTime } from "../../helpers/formatCreatedTime";
 import { totalVotes } from "../../helpers/vote";
+import parse from "html-react-parser";
 
 interface ThreadCardProps extends ThreadType {
   avatar?: string;
@@ -41,7 +42,7 @@ const ThreadCard = ({ avatar, name, ...thread }: ThreadCardProps) => {
             {thread.title}
           </Link>
           <p className="text-sm">
-            {truncateText(thread.body)}{" "}
+            {parse(truncateText(thread.body))}{" "}
             {thread.body.length >= 250 && (
               <Link
                 to={`/threads/${thread.id}`}
