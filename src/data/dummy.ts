@@ -1,4 +1,4 @@
-import { DetailThreadType, ThreadsResponse } from "../types/thread";
+import { ThreadDetailsType, ThreadsResponse } from "../types/thread";
 
 export const users = [
   {
@@ -169,7 +169,7 @@ export const leaderboards = [
   },
 ];
 
-export const detailThread: DetailThreadType = {
+export const detailThread: ThreadDetailsType = {
   id: "thread-1",
   title: "Thread Pertama",
   body: "Ini adalah thread pertama",

@@ -2,7 +2,7 @@ import { Triangle } from "lucide-react";
 import defaultImage from "../../assets/default-image.webp";
 import Card, { CardContent, CardHeader } from "../../components/ui/Card";
 import Button from "../ui/Button";
-import { DetailThreadType } from "../../types/thread";
+import { ThreadDetailsType } from "../../types/thread";
 import { formatCreatedTime } from "../../helpers/formatCreatedTime";
 import { totalUpVotes } from "../../helpers/vote";
 import parse from "html-react-parser";
@@ -14,7 +14,7 @@ const ThreadDetailCard = ({
   createdAt,
   upVotesBy,
   downVotesBy,
-}: DetailThreadType) => {
+}: ThreadDetailsType) => {
   return (
     <Card className="grid grid-cols-[max-content_1fr]">
       <div className="col-start-1 col-end-auto flex flex-col items-center justify-center gap-2 pr-4">

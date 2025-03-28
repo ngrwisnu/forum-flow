@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { DetailThreadType, ThreadsResponse } from "../../types/thread";
+import { ThreadDetailsType, ThreadsResponse } from "../../types/thread";
 
 const initialState: {
   threads: ThreadsResponse;
-  threadDetails: DetailThreadType | null;
+  threadDetails: ThreadDetailsType | null;
 } = {
   threads: [],
   threadDetails: null,

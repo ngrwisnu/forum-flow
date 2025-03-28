@@ -15,7 +15,7 @@ export interface ThreadType {
 
 export type ThreadsResponse = ThreadType[];
 
-export interface DetailThreadType
+export interface ThreadDetailsType
   extends Omit<ThreadType, "ownerId" | "totalComments"> {
   owner: Partial<UserType>;
   comments: CommentType[];
