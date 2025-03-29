@@ -6,12 +6,16 @@ import {
   upVoteThread,
 } from "../../utils/apis/threads";
 import {
+  abortCommentVote,
   abortThreadVote,
   updateDownVote,
+  updateDownVoteComment,
   updateThreadDetails,
   updateThreads,
   updateUpVote,
+  updateUpVoteComment,
 } from "./slice";
+import { downVoteComment, upVoteComment } from "../../utils/apis/comment";
 
 export const asyncGetThreads = createAsyncThunk(
   "thread/asyncGetThreads",
@@ -71,6 +75,50 @@ export const asyncDownVoteThread = createAsyncThunk(
       alert(response.message);
 
       dispatch(abortThreadVote({ type: "down-vote", userId }));
+    }
+  },
+);
+
+export const asyncUpVoteComment = createAsyncThunk(
+  "thread/asyncUpVoteComment",
+  async (
+    {
+      threadId,
+      commentId,
+      userId,
+    }: { threadId: string; commentId: string; userId: string },
+    { dispatch },
+  ) => {
+    dispatch(updateUpVoteComment({ commentId, userId }));
+
+    const response = await upVoteComment(threadId, commentId);
+
+    if (response.isError) {
+      alert(response.message);
+
+      dispatch(abortCommentVote({ type: "up-vote", commentId, userId }));
+    }
+  },
+);
+
+export const asyncDownVoteComment = createAsyncThunk(
+  "thread/asyncDownVoteComment",
+  async (
+    {
+      threadId,
+      commentId,
+      userId,
+    }: { threadId: string; commentId: string; userId: string },
+    { dispatch },
+  ) => {
+    dispatch(updateDownVoteComment({ commentId, userId }));
+
+    const response = await downVoteComment(threadId, commentId);
+
+    if (response.isError) {
+      alert(response.message);
+
+      dispatch(abortCommentVote({ type: "down-vote", commentId, userId }));
     }
   },
 );
