@@ -19,10 +19,39 @@ const threadSlice = createSlice({
     updateThreadDetails(state, action) {
       state.threadDetails = action.payload;
     },
+    updateUpVote(state, action) {
+      const isAlreadyUpVote = state.threadDetails?.upVotesBy.includes(
+        action.payload,
+      );
+
+      state.threadDetails?.downVotesBy.filter(
+        (user) => user !== action.payload,
+      );
+
+      if (!isAlreadyUpVote) {
+        state.threadDetails?.upVotesBy.push(action.payload);
+      }
+    },
+    updateDownVote(state, action) {
+      const isAlreadyDownVote = state.threadDetails?.downVotesBy.includes(
+        action.payload,
+      );
+
+      state.threadDetails?.upVotesBy.filter((user) => user !== action.payload);
+
+      if (!isAlreadyDownVote) {
+        state.threadDetails?.downVotesBy.push(action.payload);
+      }
+    },
   },
 });
 
 const { actions, reducer } = threadSlice;
 
-export const { updateThreads, updateThreadDetails } = actions;
+export const {
+  updateThreads,
+  updateThreadDetails,
+  updateUpVote,
+  updateDownVote,
+} = actions;
 export default reducer;

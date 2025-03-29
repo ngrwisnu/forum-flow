@@ -6,8 +6,17 @@ import { ThreadDetailsType } from "../../types/thread";
 import { formatCreatedTime } from "../../helpers/formatCreatedTime";
 import { totalUpVotes } from "../../helpers/vote";
 import parse from "html-react-parser";
+import { useNavigate } from "react-router-dom";
+import { getAccessToken } from "../../utils/apis/auths";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../store";
+import {
+  asyncDownVoteThread,
+  asyncUpVoteThread,
+} from "../../store/thread/action";
 
 const ThreadDetailCard = ({
+  id,
   title,
   body,
   owner,
@@ -15,17 +24,57 @@ const ThreadDetailCard = ({
   upVotesBy,
   downVotesBy,
 }: ThreadDetailsType) => {
+  const dispatch = useDispatch<AppDispatch>();
+
+  const navigate = useNavigate();
+
+  const token = getAccessToken();
+
+  const upVoteHandler = (threadId: string) => {
+    if (!token) {
+      navigate("/login");
+      return;
+    }
+
+    if (!upVotesBy.includes(owner.id!)) {
+      dispatch(asyncUpVoteThread({ threadId, userId: owner.id! }));
+    }
+  };
+
+  const downVoteHandler = (threadId: string) => {
+    if (!token) {
+      navigate("/login");
+      return;
+    }
+
+    if (!downVotesBy.includes(owner.id!)) {
+      dispatch(asyncDownVoteThread({ threadId, userId: owner.id! }));
+    }
+  };
+
   return (
     <Card className="grid grid-cols-[max-content_1fr]">
       <div className="col-start-1 col-end-auto flex flex-col items-center justify-center gap-2 pr-4">
-        <Button className="flex size-8 items-center justify-center rounded-full border border-slate-400 bg-transparent p-0 text-slate-400">
-          <Triangle size={14} />
+        <Button
+          className={`${upVotesBy.includes(owner.id!) ? "bg-primary/80 border-primary text-white" : "border-slate-400 bg-transparent text-slate-400"} flex size-8 items-center justify-center rounded-full border p-0`}
+          onClick={() => upVoteHandler(id)}
+        >
+          <Triangle
+            size={14}
+            fill={upVotesBy.includes(owner.id!) ? "#ffffff" : "none"}
+          />
         </Button>
         <span className="font-semibold">
           {totalUpVotes(upVotesBy?.length, downVotesBy?.length)}
         </span>
-        <Button className="flex size-8 rotate-180 items-center justify-center rounded-full border border-slate-400 bg-transparent p-0 text-slate-400">
-          <Triangle size={14} />
+        <Button
+          className={`${downVotesBy.includes(owner.id!) ? "bg-primary/80 border-primary text-white" : "border-slate-400 bg-transparent text-slate-400"} flex size-8 rotate-180 items-center justify-center rounded-full border border-slate-400 bg-transparent p-0 text-slate-400`}
+          onClick={() => downVoteHandler(id)}
+        >
+          <Triangle
+            size={14}
+            fill={upVotesBy.includes(owner.id!) ? "#ffffff" : "none"}
+          />
         </Button>
       </div>
 

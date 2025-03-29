@@ -12,10 +12,10 @@ const Login = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
-    if (auth.user) {
+    if (auth.isAuthenticated) {
       navigate("/");
     }
-  }, [auth.user, navigate]);
+  }, [auth.isAuthenticated, navigate]);
 
   const loginHandler = (email: string, password: string) => {
     dispatch(asyncUserLogin({ email, password }));

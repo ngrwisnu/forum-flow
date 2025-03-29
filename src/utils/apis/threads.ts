@@ -28,3 +28,23 @@ export async function getThread(threadId: string) {
     url,
   });
 }
+
+export async function upVoteThread(threadId: string) {
+  const url = `${BASE_URL}/threads/${threadId}/up-vote`;
+
+  return callAPI({
+    url,
+    method: "POST",
+    token: getAccessToken(),
+  });
+}
+
+export async function downVoteThread(threadId: string) {
+  const url = `${BASE_URL}/threads/${threadId}/down-vote`;
+
+  return callAPI({
+    url,
+    method: "POST",
+    token: getAccessToken(),
+  });
+}
