@@ -24,9 +24,12 @@ const threadSlice = createSlice({
         action.payload,
       );
 
-      state.threadDetails?.downVotesBy.filter(
-        (user) => user !== action.payload,
-      );
+      if (state.threadDetails) {
+        state.threadDetails.downVotesBy =
+          state.threadDetails.downVotesBy.filter(
+            (user) => user !== action.payload,
+          );
+      }
 
       if (!isAlreadyUpVote) {
         state.threadDetails?.upVotesBy.push(action.payload);
@@ -37,7 +40,11 @@ const threadSlice = createSlice({
         action.payload,
       );
 
-      state.threadDetails?.upVotesBy.filter((user) => user !== action.payload);
+      if (state.threadDetails) {
+        state.threadDetails.upVotesBy = state.threadDetails.upVotesBy.filter(
+          (user) => user !== action.payload,
+        );
+      }
 
       if (!isAlreadyDownVote) {
         state.threadDetails?.downVotesBy.push(action.payload);
