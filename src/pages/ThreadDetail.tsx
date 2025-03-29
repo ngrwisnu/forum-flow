@@ -44,6 +44,15 @@ const ThreadDetail = () => {
     }
   };
 
+  const upVoteCommentHandler = (threadId: string, commentId: string) => {
+    if (!auth.isAuthenticated) {
+      navigate("/login");
+      return;
+    }
+
+    console.log(threadId, commentId);
+  };
+
   const downVoteHandler = (threadId: string) => {
     if (!auth.isAuthenticated) {
       navigate("/login");
@@ -55,6 +64,15 @@ const ThreadDetail = () => {
         asyncDownVoteThread({ threadId, userId: auth.user?.id as string }),
       );
     }
+  };
+
+  const downVoteCommentHandler = (threadId: string, commentId: string) => {
+    if (!auth.isAuthenticated) {
+      navigate("/login");
+      return;
+    }
+
+    console.log(threadId, commentId);
   };
 
   const commentSorterHandler = (e: ChangeEvent<HTMLSelectElement>) => {
@@ -123,7 +141,13 @@ const ThreadDetail = () => {
             <p className="text-center">No comments found</p>
           )}
           {sortedComments.map((comment) => (
-            <CommentCard key={comment.id} {...comment} />
+            <CommentCard
+              threadId={threadId as string}
+              upVoteCommentHandler={upVoteCommentHandler}
+              downVoteCommentHandler={downVoteCommentHandler}
+              key={comment.id}
+              {...comment}
+            />
           ))}
         </div>
       </div>

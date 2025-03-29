@@ -6,25 +6,53 @@ import { CommentType } from "../../types/comment";
 import { formatCreatedTime } from "../../helpers/formatCreatedTime";
 import { totalUpVotes } from "../../helpers/vote";
 import parse from "html-react-parser";
+import { getUserFromStorage } from "../../utils/apis/auths";
+
+interface CommentCardProps extends CommentType {
+  threadId: string;
+  upVoteCommentHandler: (threadId: string, commentId: string) => void;
+  downVoteCommentHandler: (threadId: string, commentId: string) => void;
+}
 
 const CommentCard = ({
+  threadId,
+  id,
   content,
   owner,
   createdAt,
   upVotesBy,
   downVotesBy,
-}: CommentType) => {
+  upVoteCommentHandler,
+  downVoteCommentHandler,
+}: CommentCardProps) => {
+  const authUser = getUserFromStorage();
   const upVotesValue = totalUpVotes(upVotesBy.length, downVotesBy.length);
 
   return (
     <Card className="grid grid-cols-[max-content_1fr] rounded-none border-b border-slate-300 bg-transparent p-4">
       <div className="col-start-1 col-end-auto flex flex-col items-center justify-center gap-2 pr-4">
-        <Button className="flex size-8 items-center justify-center rounded-full border border-slate-400 bg-transparent p-0 text-slate-400">
-          <Triangle size={14} />
+        <Button
+          className={`${upVotesBy.includes(authUser?.id as string) ? "bg-primary/80 border-primary text-white" : "border-slate-400 bg-transparent text-slate-400"} flex size-8 items-center justify-center rounded-full border p-0`}
+          onClick={() => upVoteCommentHandler(threadId, id)}
+        >
+          <Triangle
+            size={14}
+            fill={
+              upVotesBy.includes(authUser?.id as string) ? "#ffffff" : "none"
+            }
+          />
         </Button>
         <span className="font-semibold">{upVotesValue}</span>
-        <Button className="flex size-8 rotate-180 items-center justify-center rounded-full border border-slate-400 bg-transparent p-0 text-slate-400">
-          <Triangle size={14} />
+        <Button
+          className={`${downVotesBy.includes(authUser?.id as string) ? "bg-primary/80 border-primary text-white" : "border-slate-400 bg-transparent text-slate-400"} flex size-8 rotate-180 items-center justify-center rounded-full border p-0`}
+          onClick={() => downVoteCommentHandler(threadId, id)}
+        >
+          <Triangle
+            size={14}
+            fill={
+              downVotesBy.includes(authUser?.id as string) ? "#ffffff" : "none"
+            }
+          />
         </Button>
       </div>
 

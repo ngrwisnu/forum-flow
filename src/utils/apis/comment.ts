@@ -15,3 +15,23 @@ export async function createComment(
     body: data,
   });
 }
+
+export async function upVoteComment(threadId: string, commentId: string) {
+  const url = `${BASE_URL}/threads/${threadId}/comments/${commentId}/up-vote`;
+
+  return callAPI({
+    url,
+    method: "POST",
+    token: getAccessToken(),
+  });
+}
+
+export async function downVoteComment(threadId: string, commentId: string) {
+  const url = `${BASE_URL}/threads/${threadId}/comments/${commentId}/down-vote`;
+
+  return callAPI({
+    url,
+    method: "POST",
+    token: getAccessToken(),
+  });
+}
