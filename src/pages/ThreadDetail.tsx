@@ -6,8 +6,12 @@ import { itemsSorter } from "../helpers/itemsSorter";
 import { totalUpVotes } from "../helpers/vote";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../store";
-import { Link, useParams } from "react-router-dom";
-import { asyncGetThreadDetails } from "../store/thread/action";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import {
+  asyncDownVoteThread,
+  asyncGetThreadDetails,
+  asyncUpVoteThread,
+} from "../store/thread/action";
 import CommentForm from "../components/comment/CommentForm";
 import { createComment } from "../utils/apis/comment";
 
@@ -17,6 +21,7 @@ const ThreadDetail = () => {
     "newest" | "highest_votes"
   >("highest_votes");
 
+  const navigate = useNavigate();
   const { threadId } = useParams();
 
   const dispatch = useDispatch<AppDispatch>();
@@ -25,6 +30,32 @@ const ThreadDetail = () => {
   useEffect(() => {
     dispatch(asyncGetThreadDetails(threadId as string));
   }, [dispatch, threadId, refresh]);
+
+  const upVoteHandler = (threadId: string) => {
+    if (!auth.isAuthenticated) {
+      navigate("/login");
+      return;
+    }
+
+    if (!thread.threadDetails?.upVotesBy.includes(auth.user?.id as string)) {
+      dispatch(
+        asyncUpVoteThread({ threadId, userId: auth.user?.id as string }),
+      );
+    }
+  };
+
+  const downVoteHandler = (threadId: string) => {
+    if (!auth.isAuthenticated) {
+      navigate("/login");
+      return;
+    }
+
+    if (!thread.threadDetails?.downVotesBy.includes(auth.user?.id as string)) {
+      dispatch(
+        asyncDownVoteThread({ threadId, userId: auth.user?.id as string }),
+      );
+    }
+  };
 
   const commentSorterHandler = (e: ChangeEvent<HTMLSelectElement>) => {
     setSortCommentBy(e.target.value as "newest" | "highest_votes");
@@ -53,7 +84,11 @@ const ThreadDetail = () => {
   return (
     <div className="w-full p-4">
       <div className="rounded-lg bg-white p-4">
-        <ThreadDetailCard {...thread.threadDetails} />
+        <ThreadDetailCard
+          upVoteThreadHandler={upVoteHandler}
+          downVoteThreadHandler={downVoteHandler}
+          {...thread.threadDetails}
+        />
         <div className="col-start-1 -col-end-1 border-t border-slate-200 py-3">
           <h2 className="my-3 text-lg">Write your comment</h2>
           {!auth.isAuthenticated && (

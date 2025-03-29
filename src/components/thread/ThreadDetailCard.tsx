@@ -6,14 +6,12 @@ import { ThreadDetailsType } from "../../types/thread";
 import { formatCreatedTime } from "../../helpers/formatCreatedTime";
 import { totalUpVotes } from "../../helpers/vote";
 import parse from "html-react-parser";
-import { useNavigate } from "react-router-dom";
-import { getAccessToken } from "../../utils/apis/auths";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "../../store";
-import {
-  asyncDownVoteThread,
-  asyncUpVoteThread,
-} from "../../store/thread/action";
+import { getUserFromStorage } from "../../utils/apis/auths";
+
+interface ThreadDetailCardProps extends ThreadDetailsType {
+  upVoteThreadHandler: (threadId: string) => void;
+  downVoteThreadHandler: (threadId: string) => void;
+}
 
 const ThreadDetailCard = ({
   id,
@@ -23,57 +21,37 @@ const ThreadDetailCard = ({
   createdAt,
   upVotesBy,
   downVotesBy,
-}: ThreadDetailsType) => {
-  const dispatch = useDispatch<AppDispatch>();
-
-  const navigate = useNavigate();
-
-  const token = getAccessToken();
-
-  const upVoteHandler = (threadId: string) => {
-    if (!token) {
-      navigate("/login");
-      return;
-    }
-
-    if (!upVotesBy.includes(owner.id!)) {
-      dispatch(asyncUpVoteThread({ threadId, userId: owner.id! }));
-    }
-  };
-
-  const downVoteHandler = (threadId: string) => {
-    if (!token) {
-      navigate("/login");
-      return;
-    }
-
-    if (!downVotesBy.includes(owner.id!)) {
-      dispatch(asyncDownVoteThread({ threadId, userId: owner.id! }));
-    }
-  };
+  upVoteThreadHandler,
+  downVoteThreadHandler,
+}: ThreadDetailCardProps) => {
+  const authUser = getUserFromStorage();
 
   return (
     <Card className="grid grid-cols-[max-content_1fr]">
       <div className="col-start-1 col-end-auto flex flex-col items-center justify-center gap-2 pr-4">
         <Button
-          className={`${upVotesBy.includes(owner.id!) ? "bg-primary/80 border-primary text-white" : "border-slate-400 bg-transparent text-slate-400"} flex size-8 items-center justify-center rounded-full border p-0`}
-          onClick={() => upVoteHandler(id)}
+          className={`${upVotesBy.includes(authUser?.id as string) ? "bg-primary/80 border-primary text-white" : "border-slate-400 bg-transparent text-slate-400"} flex size-8 items-center justify-center rounded-full border p-0`}
+          onClick={() => upVoteThreadHandler(id)}
         >
           <Triangle
             size={14}
-            fill={upVotesBy.includes(owner.id!) ? "#ffffff" : "none"}
+            fill={
+              upVotesBy.includes(authUser?.id as string) ? "#ffffff" : "none"
+            }
           />
         </Button>
         <span className="font-semibold">
           {totalUpVotes(upVotesBy?.length, downVotesBy?.length)}
         </span>
         <Button
-          className={`${downVotesBy.includes(owner.id!) ? "bg-primary/80 border-primary text-white" : "border-slate-400 bg-transparent text-slate-400"} flex size-8 rotate-180 items-center justify-center rounded-full border border-slate-400 bg-transparent p-0 text-slate-400`}
-          onClick={() => downVoteHandler(id)}
+          className={`${downVotesBy.includes(authUser?.id as string) ? "bg-primary/80 border-primary text-white" : "border-slate-400 bg-transparent text-slate-400"} flex size-8 rotate-180 items-center justify-center rounded-full border p-0`}
+          onClick={() => downVoteThreadHandler(id)}
         >
           <Triangle
             size={14}
-            fill={upVotesBy.includes(owner.id!) ? "#ffffff" : "none"}
+            fill={
+              downVotesBy.includes(authUser?.id as string) ? "#ffffff" : "none"
+            }
           />
         </Button>
       </div>
