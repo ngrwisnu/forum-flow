@@ -154,8 +154,8 @@ const ThreadDetail = () => {
           )}
         </div>
       </div>
-      <div className="ml-8 border-l border-slate-300 pt-8">
-        <div className="flex items-center justify-between py-3 pl-4">
+      <div className="@container ml-8 border-l border-slate-300 pt-8">
+        <div className="flex flex-col items-start justify-between gap-3 py-3 pl-4 @md:flex-row @md:items-center @md:gap-0">
           <h2 className="text-lg font-normal">
             <span className="font-bold">
               {thread.threadDetails.comments.length}
