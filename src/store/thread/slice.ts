@@ -50,6 +50,16 @@ const threadSlice = createSlice({
         state.threadDetails?.downVotesBy.push(action.payload);
       }
     },
+    abortThreadVote(state, action) {
+      const voteType =
+        action.payload.type === "up-vote" ? "upVotesBy" : "downVotesBy";
+
+      if (state.threadDetails) {
+        state.threadDetails[voteType] = state.threadDetails[voteType].filter(
+          (user) => user !== action.payload.userId,
+        );
+      }
+    },
   },
 });
 
@@ -60,5 +70,6 @@ export const {
   updateThreadDetails,
   updateUpVote,
   updateDownVote,
+  abortThreadVote,
 } = actions;
 export default reducer;

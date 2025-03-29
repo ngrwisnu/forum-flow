@@ -6,6 +6,7 @@ import {
   upVoteThread,
 } from "../../utils/apis/threads";
 import {
+  abortThreadVote,
   updateDownVote,
   updateThreadDetails,
   updateThreads,
@@ -44,13 +45,15 @@ export const asyncUpVoteThread = createAsyncThunk(
     { threadId, userId }: { threadId: string; userId: string },
     { dispatch },
   ) => {
+    dispatch(updateUpVote(userId));
+
     const response = await upVoteThread(threadId);
 
     if (response.isError) {
       alert(response.message);
-    }
 
-    dispatch(updateUpVote(userId));
+      dispatch(abortThreadVote({ type: "up-vote", userId }));
+    }
   },
 );
 
@@ -60,12 +63,14 @@ export const asyncDownVoteThread = createAsyncThunk(
     { threadId, userId }: { threadId: string; userId: string },
     { dispatch },
   ) => {
+    dispatch(updateDownVote(userId));
+
     const response = await downVoteThread(threadId);
 
     if (response.isError) {
       alert(response.message);
-    }
 
-    dispatch(updateDownVote(userId));
+      dispatch(abortThreadVote({ type: "down-vote", userId }));
+    }
   },
 );
