@@ -11,10 +11,10 @@ const NewThread = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!auth.user) {
+    if (!auth.isAuthenticated) {
       navigate("/login");
     }
-  }, [auth.user, navigate]);
+  }, [auth.isAuthenticated, navigate]);
 
   const submitHander = async (data: NewThreadRequest) => {
     const response = await createThread(data);
