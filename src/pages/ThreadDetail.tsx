@@ -8,8 +8,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../store";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import {
+  asyncDownVoteComment,
   asyncDownVoteThread,
   asyncGetThreadDetails,
+  asyncUpVoteComment,
   asyncUpVoteThread,
 } from "../store/thread/action";
 import CommentForm from "../components/comment/CommentForm";
@@ -50,7 +52,21 @@ const ThreadDetail = () => {
       return;
     }
 
-    console.log(threadId, commentId);
+    const targetComment = thread.threadDetails?.comments.find(
+      (comment) => comment.id === commentId,
+    );
+
+    if (
+      targetComment &&
+      !targetComment.upVotesBy.includes(auth.user?.id as string)
+    )
+      dispatch(
+        asyncUpVoteComment({
+          threadId,
+          commentId,
+          userId: auth.user?.id as string,
+        }),
+      );
   };
 
   const downVoteHandler = (threadId: string) => {
@@ -72,7 +88,23 @@ const ThreadDetail = () => {
       return;
     }
 
-    console.log(threadId, commentId);
+    const targetComment = thread.threadDetails?.comments.find(
+      (comment) => comment.id === commentId,
+    );
+
+    if (
+      targetComment &&
+      !targetComment.downVotesBy.includes(auth.user?.id as string)
+    ) {
+      console.log("HIT");
+      dispatch(
+        asyncDownVoteComment({
+          threadId,
+          commentId,
+          userId: auth.user?.id as string,
+        }),
+      );
+    }
   };
 
   const commentSorterHandler = (e: ChangeEvent<HTMLSelectElement>) => {
