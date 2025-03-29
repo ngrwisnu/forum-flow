@@ -16,10 +16,12 @@ import {
   updateUpVoteComment,
 } from "./slice";
 import { downVoteComment, upVoteComment } from "../../utils/apis/comment";
+import { hideLoading, showLoading } from "react-redux-loading-bar";
 
 export const asyncGetThreads = createAsyncThunk(
   "thread/asyncGetThreads",
   async (_, { dispatch }) => {
+    dispatch(showLoading());
     const response = await getAllThreads();
 
     if (response.isError) {
@@ -27,12 +29,14 @@ export const asyncGetThreads = createAsyncThunk(
     }
 
     dispatch(updateThreads(response.data.threads));
+    dispatch(hideLoading());
   },
 );
 
 export const asyncGetThreadDetails = createAsyncThunk(
   "thread/asyncGetThreadDetails",
   async (threadId: string, { dispatch }) => {
+    dispatch(showLoading());
     const response = await getThread(threadId);
 
     if (response.isError) {
@@ -40,6 +44,7 @@ export const asyncGetThreadDetails = createAsyncThunk(
     }
 
     dispatch(updateThreadDetails(response.data.detailThread));
+    dispatch(hideLoading());
   },
 );
 

@@ -5,6 +5,7 @@ import { AppDispatch, RootState } from "../../store/index.ts";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { asyncGetLeaderboard } from "../../store/leaderboard/action.ts";
+import ProgressBar from "../ui/ProgressBar.tsx";
 
 const RootLayout = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -23,6 +24,7 @@ const RootLayout = () => {
 
   return (
     <>
+      <ProgressBar />
       <Header isAuthenticated={auth.isAuthenticated} user={auth.user} />
       <main className="grid min-h-svh w-full grid-cols-[20%_1fr_20%] justify-center divide-x-2 divide-slate-200">
         <div></div>
