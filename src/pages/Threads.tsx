@@ -39,7 +39,7 @@ const Threads = () => {
           Create new discussion
         </Link>
       </div>
-      <ThreadsFilter />
+      <ThreadsFilter categories={thread.threadCategories} />
       <div className="flex flex-col gap-4">
         {!sortedThreads.length && (
           <p className="text-center">No results found</p>

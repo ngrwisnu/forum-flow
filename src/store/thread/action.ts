@@ -8,6 +8,7 @@ import {
 import {
   abortCommentVote,
   abortThreadVote,
+  addThreadCategories,
   updateDownVote,
   updateDownVoteComment,
   updateThreadDetails,
@@ -29,6 +30,7 @@ export const asyncGetThreads = createAsyncThunk(
     }
 
     dispatch(updateThreads(response.data.threads));
+    dispatch(addThreadCategories(response.data.threads));
     dispatch(hideLoading());
   },
 );

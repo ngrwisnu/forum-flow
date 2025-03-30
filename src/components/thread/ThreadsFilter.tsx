@@ -3,10 +3,9 @@ import { capitalizedFirstLetter } from "../../helpers/capitalizeFirstLetter";
 import Select from "../ui/Select";
 import { useSearchParams } from "react-router-dom";
 
-const ThreadsFilter = () => {
+const ThreadsFilter = ({ categories }: { categories: string[] }) => {
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const categories = ["general", "programming"];
   const sortedCategories = [...categories].sort();
 
   const sortedBy = searchParams.get("sort") || "newest";

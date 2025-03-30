@@ -4,9 +4,11 @@ import { ThreadDetailsType, ThreadsResponse } from "../../types/thread";
 const initialState: {
   threads: ThreadsResponse;
   threadDetails: ThreadDetailsType | null;
+  threadCategories: string[];
 } = {
   threads: [],
   threadDetails: null,
+  threadCategories: [],
 };
 
 const threadSlice = createSlice({
@@ -18,6 +20,15 @@ const threadSlice = createSlice({
     },
     updateThreadDetails(state, action) {
       state.threadDetails = action.payload;
+    },
+    addThreadCategories(state, action) {
+      const list = [];
+
+      for (const thread of action.payload) {
+        list.push(thread.category);
+      }
+
+      state.threadCategories = [...new Set(list)];
     },
     updateUpVote(state, action) {
       const isAlreadyUpVote = state.threadDetails?.upVotesBy.includes(
@@ -121,6 +132,7 @@ const { actions, reducer } = threadSlice;
 export const {
   updateThreads,
   updateThreadDetails,
+  addThreadCategories,
   updateUpVote,
   updateDownVote,
   abortThreadVote,
