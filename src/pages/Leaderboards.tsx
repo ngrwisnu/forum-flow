@@ -1,11 +1,11 @@
-import Card, { CardContent, CardFooter } from "../components/ui/Card";
-import defaultImage from "../assets/default-image.webp";
-import LeaderboardsTable from "../components/leaderboard/LeaderboardsTable";
-import { LeaderboardResponse } from "../types/leaderboard";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../store";
-import { useEffect } from "react";
-import { asyncGetLeaderboard } from "../store/leaderboard/action";
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import Card, { CardContent, CardFooter } from '../components/ui/Card';
+import defaultImage from '../assets/default-image.webp';
+import LeaderboardsTable from '../components/leaderboard/LeaderboardsTable';
+import { LeaderboardResponse } from '../types/leaderboard';
+import { AppDispatch, RootState } from '../store';
+import { asyncGetLeaderboard } from '../store/leaderboard/action';
 
 const Leaderboards = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -37,7 +37,7 @@ const Leaderboards = () => {
               <div className="stat place-items-center">
                 <div className="stat-title">Position</div>
                 <div
-                  className={`stat-value ${index === 0 && "text-[#FFD700]"} ${index === 1 && "text-[#C0C0C0]"} ${index === 2 && "text-[#CD7F32]"}`}
+                  className={`stat-value ${index === 0 && 'text-[#FFD700]'} ${index === 1 && 'text-[#C0C0C0]'} ${index === 2 && 'text-[#CD7F32]'}`}
                 >
                   {index + 1}
                 </div>

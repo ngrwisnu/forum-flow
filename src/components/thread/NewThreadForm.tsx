@@ -1,11 +1,11 @@
-import { ChangeEvent, useState } from "react";
-import { capitalizedFirstLetter } from "../../helpers/capitalizeFirstLetter";
-import Button from "../ui/Button";
-import Editor from "../ui/Editor";
-import { FormItem } from "../ui/Form";
-import Input from "../ui/Input";
-import Select from "../ui/Select";
-import { NewThreadRequest } from "../../types/thread";
+import { ChangeEvent, useState } from 'react';
+import { capitalizedFirstLetter } from '../../helpers/capitalizeFirstLetter';
+import Button from '../ui/Button';
+import Editor from '../ui/Editor';
+import { FormItem } from '../ui/Form';
+import Input from '../ui/Input';
+import Select from '../ui/Select';
+import { NewThreadRequest } from '../../types/thread';
 
 interface NewThreadFormProps {
   categories: string[];
@@ -13,9 +13,9 @@ interface NewThreadFormProps {
 }
 
 const NewThreadForm = ({ categories, onSubmit }: NewThreadFormProps) => {
-  const [title, setTitle] = useState("");
-  const [category, setCategory] = useState("");
-  const [body, setBody] = useState("");
+  const [title, setTitle] = useState('');
+  const [category, setCategory] = useState('');
+  const [body, setBody] = useState('');
 
   const editorBlurHandler = (e: ChangeEvent<HTMLDivElement>) => {
     setBody(e.target.innerHTML);
@@ -61,12 +61,11 @@ const NewThreadForm = ({ categories, onSubmit }: NewThreadFormProps) => {
         <Button
           type="button"
           className="btn-secondary ml-auto"
-          onClick={() =>
-            onSubmit({
-              title,
-              category,
-              body,
-            })
+          onClick={() => onSubmit({
+            title,
+            category,
+            body,
+          })
           }
         >
           Post thread

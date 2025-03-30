@@ -1,9 +1,8 @@
-import defaultImage from "../../assets/default-image.webp";
-import Table, { TableRow } from "../ui/Table";
-import { LeaderboardResponse } from "../../types/leaderboard";
+import defaultImage from '../../assets/default-image.webp';
+import Table, { TableRow } from '../ui/Table';
+import { LeaderboardResponse } from '../../types/leaderboard';
 
-const LeaderboardsTable = ({ data }: { data: LeaderboardResponse }) => {
-  return (
+const LeaderboardsTable = ({ data }: { data: LeaderboardResponse }) => (
     <div className="overflow-x-auto">
       <Table>
         <thead>
@@ -42,7 +41,6 @@ const LeaderboardsTable = ({ data }: { data: LeaderboardResponse }) => {
         </tbody>
       </Table>
     </div>
-  );
-};
+);
 
 export default LeaderboardsTable;

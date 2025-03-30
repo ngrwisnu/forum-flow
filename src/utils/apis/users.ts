@@ -1,5 +1,5 @@
-import { getAccessToken } from "./auths";
-import callAPI, { BASE_URL } from "./callAPI";
+import { getAccessToken } from './auths';
+import callAPI, { BASE_URL } from './callAPI';
 
 export async function getUserProfile() {
   const url = `${BASE_URL}/users/me`;

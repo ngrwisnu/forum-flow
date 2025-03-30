@@ -1,5 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { UsersResponse } from "../../types/user";
+import { createSlice } from '@reduxjs/toolkit';
+import { UsersResponse } from '../../types/user';
 
 const initialUsers: {
   users: UsersResponse;
@@ -8,7 +8,7 @@ const initialUsers: {
 };
 
 const usersSlice = createSlice({
-  name: "users",
+  name: 'users',
   initialState: initialUsers,
   reducers: {
     updateUsers(state, action) {

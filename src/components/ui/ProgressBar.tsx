@@ -1,11 +1,9 @@
-import LoadingBar from "react-redux-loading-bar";
+import LoadingBar from 'react-redux-loading-bar';
 
-const ProgressBar = () => {
-  return (
+const ProgressBar = () => (
     <div className="h-1">
-      <LoadingBar style={{ height: "4px" }} />
+      <LoadingBar style={{ height: '4px' }} />
     </div>
-  );
-};
+);
 
 export default ProgressBar;

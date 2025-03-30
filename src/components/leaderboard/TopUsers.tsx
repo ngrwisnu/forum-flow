@@ -1,9 +1,8 @@
-import defaultImage from "../../assets/default-image.webp";
-import { Link } from "react-router-dom";
-import { LeaderboardResponse } from "../../types/leaderboard";
+import { Link } from 'react-router-dom';
+import defaultImage from '../../assets/default-image.webp';
+import { LeaderboardResponse } from '../../types/leaderboard';
 
-const TopUsers = ({ data }: { data: LeaderboardResponse }) => {
-  return (
+const TopUsers = ({ data }: { data: LeaderboardResponse }) => (
     <div className="w-full max-w-[250px] bg-transparent p-4">
       <h3 className="mb-3 text-xl font-medium">Top Users</h3>
       <div className="flex flex-col gap-2">
@@ -33,7 +32,6 @@ const TopUsers = ({ data }: { data: LeaderboardResponse }) => {
         See leaderboards
       </Link>
     </div>
-  );
-};
+);
 
 export default TopUsers;

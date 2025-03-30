@@ -1,12 +1,12 @@
-import { Triangle } from "lucide-react";
-import defaultImage from "../../assets/default-image.webp";
-import Card, { CardContent, CardHeader } from "../../components/ui/Card";
-import Button from "../ui/Button";
-import { ThreadDetailsType } from "../../types/thread";
-import { formatCreatedTime } from "../../helpers/formatCreatedTime";
-import { totalUpVotes } from "../../helpers/vote";
-import parse from "html-react-parser";
-import { getUserFromStorage } from "../../utils/apis/auths";
+import { Triangle } from 'lucide-react';
+import parse from 'html-react-parser';
+import defaultImage from '../../assets/default-image.webp';
+import Card, { CardContent, CardHeader } from '../../components/ui/Card';
+import Button from '../ui/Button';
+import { ThreadDetailsType } from '../../types/thread';
+import { formatCreatedTime } from '../../helpers/formatCreatedTime';
+import { totalUpVotes } from '../../helpers/vote';
+import { getUserFromStorage } from '../../utils/apis/auths';
 
 interface ThreadDetailCardProps extends ThreadDetailsType {
   upVoteThreadHandler: (threadId: string) => void;
@@ -30,13 +30,13 @@ const ThreadDetailCard = ({
     <Card className="grid grid-cols-[max-content_1fr]">
       <div className="col-start-1 col-end-auto flex flex-col items-center justify-center gap-2 pr-4">
         <Button
-          className={`${upVotesBy.includes(authUser?.id as string) ? "bg-primary/80 border-primary text-white" : "border-slate-400 bg-transparent text-slate-400"} flex size-8 items-center justify-center rounded-full border p-0`}
+          className={`${upVotesBy.includes(authUser?.id as string) ? 'bg-primary/80 border-primary text-white' : 'border-slate-400 bg-transparent text-slate-400'} flex size-8 items-center justify-center rounded-full border p-0`}
           onClick={() => upVoteThreadHandler(id)}
         >
           <Triangle
             size={14}
             fill={
-              upVotesBy.includes(authUser?.id as string) ? "#ffffff" : "none"
+              upVotesBy.includes(authUser?.id as string) ? '#ffffff' : 'none'
             }
           />
         </Button>
@@ -44,13 +44,13 @@ const ThreadDetailCard = ({
           {totalUpVotes(upVotesBy?.length, downVotesBy?.length)}
         </span>
         <Button
-          className={`${downVotesBy.includes(authUser?.id as string) ? "bg-primary/80 border-primary text-white" : "border-slate-400 bg-transparent text-slate-400"} flex size-8 rotate-180 items-center justify-center rounded-full border p-0`}
+          className={`${downVotesBy.includes(authUser?.id as string) ? 'bg-primary/80 border-primary text-white' : 'border-slate-400 bg-transparent text-slate-400'} flex size-8 rotate-180 items-center justify-center rounded-full border p-0`}
           onClick={() => downVoteThreadHandler(id)}
         >
           <Triangle
             size={14}
             fill={
-              downVotesBy.includes(authUser?.id as string) ? "#ffffff" : "none"
+              downVotesBy.includes(authUser?.id as string) ? '#ffffff' : 'none'
             }
           />
         </Button>
@@ -65,7 +65,7 @@ const ThreadDetailCard = ({
             <div className="text-sm">{owner.name}</div>
           </div>
           <div className="text-sm text-slate-400">
-            posted{" "}
+            posted{' '}
             <span className="font-medium text-slate-900">
               {formatCreatedTime(createdAt!)}
             </span>

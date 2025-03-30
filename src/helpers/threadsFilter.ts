@@ -1,7 +1,7 @@
-import { ThreadsResponse } from "../types/thread";
+import { ThreadsResponse } from '../types/thread';
 
 export const threadsFilter = (threads: ThreadsResponse, keyword: string) => {
-  if (keyword === "all") {
+  if (keyword === 'all') {
     return threads;
   }
 

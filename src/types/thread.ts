@@ -1,5 +1,5 @@
-import { CommentType } from "./comment";
-import { UserType } from "./user";
+import { CommentType } from './comment';
+import { UserType } from './user';
 
 export interface ThreadType {
   id: string;
@@ -16,7 +16,7 @@ export interface ThreadType {
 export type ThreadsResponse = ThreadType[];
 
 export interface ThreadDetailsType
-  extends Omit<ThreadType, "ownerId" | "totalComments"> {
+  extends Omit<ThreadType, 'ownerId' | 'totalComments'> {
   owner: Partial<UserType>;
   comments: CommentType[];
 }

@@ -1,12 +1,12 @@
-import { Link } from "react-router-dom";
-import logo from "../../assets/horizontal.png";
-import defaultImage from "../../assets/default-image.webp";
-import { AlignLeft } from "lucide-react";
-import type { UserType } from "../../types/user";
-import Button from "../ui/Button";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "../../store";
-import { asyncUserLogout } from "../../store/auth/action";
+import { Link } from 'react-router-dom';
+import { AlignLeft } from 'lucide-react';
+import { useDispatch } from 'react-redux';
+import logo from '../../assets/horizontal.png';
+import defaultImage from '../../assets/default-image.webp';
+import type { UserType } from '../../types/user';
+import Button from '../ui/Button';
+import { AppDispatch } from '../../store';
+import { asyncUserLogout } from '../../store/auth/action';
 
 interface HeaderProps {
   user: UserType | null;

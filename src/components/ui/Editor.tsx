@@ -1,4 +1,4 @@
-import { ChangeEvent, HTMLAttributes, Ref } from "react";
+import { ChangeEvent, HTMLAttributes, Ref } from 'react';
 
 interface EditorProps extends HTMLAttributes<HTMLDivElement> {
   editorRef?: Ref<HTMLDivElement>;
@@ -7,12 +7,11 @@ interface EditorProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const Editor = ({
-  placeholder = "Enter the text here...",
+  placeholder = 'Enter the text here...',
   editorRef,
   editorHandler,
   ...props
-}: EditorProps) => {
-  return (
+}: EditorProps) => (
     <div
       ref={editorRef}
       className="rich-editor min-h-60 rounded-lg border border-slate-200 p-4"
@@ -21,7 +20,6 @@ const Editor = ({
       contentEditable
       {...props}
     ></div>
-  );
-};
+);
 
 export default Editor;

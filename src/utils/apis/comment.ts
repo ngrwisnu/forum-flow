@@ -1,6 +1,6 @@
-import { CreateCommentRequest } from "../../types/comment";
-import { getAccessToken } from "./auths";
-import callAPI, { BASE_URL } from "./callAPI";
+import { CreateCommentRequest } from '../../types/comment';
+import { getAccessToken } from './auths';
+import callAPI, { BASE_URL } from './callAPI';
 
 export async function createComment(
   threadId: string,
@@ -10,7 +10,7 @@ export async function createComment(
 
   return callAPI({
     url,
-    method: "POST",
+    method: 'POST',
     token: getAccessToken(),
     body: data,
   });
@@ -21,7 +21,7 @@ export async function upVoteComment(threadId: string, commentId: string) {
 
   return callAPI({
     url,
-    method: "POST",
+    method: 'POST',
     token: getAccessToken(),
   });
 }
@@ -31,7 +31,7 @@ export async function downVoteComment(threadId: string, commentId: string) {
 
   return callAPI({
     url,
-    method: "POST",
+    method: 'POST',
     token: getAccessToken(),
   });
 }

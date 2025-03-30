@@ -1,15 +1,15 @@
-import { ChangeEvent } from "react";
-import { capitalizedFirstLetter } from "../../helpers/capitalizeFirstLetter";
-import Select from "../ui/Select";
-import { useSearchParams } from "react-router-dom";
+import { ChangeEvent } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import { capitalizedFirstLetter } from '../../helpers/capitalizeFirstLetter';
+import Select from '../ui/Select';
 
 const ThreadsFilter = ({ categories }: { categories: string[] }) => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const sortedCategories = [...categories].sort();
 
-  const sortedBy = searchParams.get("sort") || "newest";
-  const category = searchParams.get("category") || "all";
+  const sortedBy = searchParams.get('sort') || 'newest';
+  const category = searchParams.get('category') || 'all';
 
   const filterHandler = (e: ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = e.target;

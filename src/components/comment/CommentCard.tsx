@@ -1,12 +1,12 @@
-import defaultImage from "../../assets/default-image.webp";
-import { Triangle } from "lucide-react";
-import Button from "../ui/Button";
-import Card, { CardContent, CardHeader } from "../ui/Card";
-import { CommentType } from "../../types/comment";
-import { formatCreatedTime } from "../../helpers/formatCreatedTime";
-import { totalUpVotes } from "../../helpers/vote";
-import parse from "html-react-parser";
-import { getUserFromStorage } from "../../utils/apis/auths";
+import { Triangle } from 'lucide-react';
+import parse from 'html-react-parser';
+import defaultImage from '../../assets/default-image.webp';
+import Button from '../ui/Button';
+import Card, { CardContent, CardHeader } from '../ui/Card';
+import { CommentType } from '../../types/comment';
+import { formatCreatedTime } from '../../helpers/formatCreatedTime';
+import { totalUpVotes } from '../../helpers/vote';
+import { getUserFromStorage } from '../../utils/apis/auths';
 
 interface CommentCardProps extends CommentType {
   threadId: string;
@@ -32,25 +32,25 @@ const CommentCard = ({
     <Card className="grid grid-cols-[max-content_1fr] rounded-none border-b border-slate-300 bg-transparent p-4">
       <div className="col-start-1 col-end-auto flex flex-col items-center justify-center gap-2 pr-4">
         <Button
-          className={`${upVotesBy.includes(authUser?.id as string) ? "bg-primary/80 border-primary text-white" : "border-slate-400 bg-transparent text-slate-400"} flex size-8 items-center justify-center rounded-full border p-0`}
+          className={`${upVotesBy.includes(authUser?.id as string) ? 'bg-primary/80 border-primary text-white' : 'border-slate-400 bg-transparent text-slate-400'} flex size-8 items-center justify-center rounded-full border p-0`}
           onClick={() => upVoteCommentHandler(threadId, id)}
         >
           <Triangle
             size={14}
             fill={
-              upVotesBy.includes(authUser?.id as string) ? "#ffffff" : "none"
+              upVotesBy.includes(authUser?.id as string) ? '#ffffff' : 'none'
             }
           />
         </Button>
         <span className="font-semibold">{upVotesValue}</span>
         <Button
-          className={`${downVotesBy.includes(authUser?.id as string) ? "bg-primary/80 border-primary text-white" : "border-slate-400 bg-transparent text-slate-400"} flex size-8 rotate-180 items-center justify-center rounded-full border p-0`}
+          className={`${downVotesBy.includes(authUser?.id as string) ? 'bg-primary/80 border-primary text-white' : 'border-slate-400 bg-transparent text-slate-400'} flex size-8 rotate-180 items-center justify-center rounded-full border p-0`}
           onClick={() => downVoteCommentHandler(threadId, id)}
         >
           <Triangle
             size={14}
             fill={
-              downVotesBy.includes(authUser?.id as string) ? "#ffffff" : "none"
+              downVotesBy.includes(authUser?.id as string) ? '#ffffff' : 'none'
             }
           />
         </Button>
@@ -65,7 +65,7 @@ const CommentCard = ({
             <div className="text-sm">{owner.name}</div>
           </div>
           <div className="text-sm text-slate-400">
-            posted{" "}
+            posted{' '}
             <span className="font-medium text-slate-900">
               {formatCreatedTime(createdAt)}
             </span>

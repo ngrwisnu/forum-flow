@@ -1,18 +1,18 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
-@import "tailwindcss";
+@import 'tailwindcss';
 @plugin "daisyui" {
   themes: light --default;
 }
 @plugin "daisyui/theme" {
-  name: "light";
+  name: 'light';
   default: true;
   --color-primary: oklch(64% 0.222 41.116);
   --color-primary-content: oklch(95% 0.038 75.164);
 }
 
 :root {
-  font-family: "Roboto", "sans-serif";
+  font-family: 'Roboto', 'sans-serif';
 }
 
 body {
