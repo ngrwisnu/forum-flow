@@ -1,5 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { ThreadDetailsType, ThreadsResponse } from "../../types/thread";
+import { createSlice } from '@reduxjs/toolkit';
+import { ThreadDetailsType, ThreadsResponse } from '../../types/thread';
 
 const initialState: {
   threads: ThreadsResponse;
@@ -12,7 +12,7 @@ const initialState: {
 };
 
 const threadSlice = createSlice({
-  name: "thread",
+  name: 'thread',
   initialState,
   reducers: {
     updateThreads(state, action) {
@@ -63,7 +63,7 @@ const threadSlice = createSlice({
     },
     abortThreadVote(state, action) {
       const voteType =
-        action.payload.type === "up-vote" ? "upVotesBy" : "downVotesBy";
+        action.payload.type === 'up-vote' ? 'upVotesBy' : 'downVotesBy';
 
       if (state.threadDetails) {
         state.threadDetails[voteType] = state.threadDetails[voteType].filter(
@@ -116,7 +116,7 @@ const threadSlice = createSlice({
         (comment) => comment.id === action.payload.commentId,
       );
       const voteType =
-        action.payload.type === "up-vote" ? "upVotesBy" : "downVotesBy";
+        action.payload.type === 'up-vote' ? 'upVotesBy' : 'downVotesBy';
 
       if (state.threadDetails && targetComment) {
         targetComment[voteType] = targetComment[voteType].filter(

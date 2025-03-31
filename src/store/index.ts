@@ -1,9 +1,9 @@
-import { configureStore } from "@reduxjs/toolkit";
-import authReducer from "./auth/slice";
-import threadReducer from "./thread/slice";
-import usersReducer from "./users/slice";
-import leaderboardReducer from "./leaderboard/slice";
-import { loadingBarReducer } from "react-redux-loading-bar";
+import { configureStore } from '@reduxjs/toolkit';
+import { loadingBarReducer } from 'react-redux-loading-bar';
+import authReducer from './auth/slice';
+import threadReducer from './thread/slice';
+import usersReducer from './users/slice';
+import leaderboardReducer from './leaderboard/slice';
 
 const store = configureStore({
   reducer: {

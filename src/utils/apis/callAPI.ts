@@ -8,16 +8,16 @@ interface CallAPIRequest {
 
 const callAPI = async ({
   url,
-  method = "GET",
+  method = 'GET',
   body,
   token,
 }: CallAPIRequest) => {
   const headers: Record<string, any> = {
-    "Content-Type": "application/json",
+    'Content-Type': 'application/json',
   };
 
   if (token) {
-    headers["Authorization"] = `Bearer ${token}`;
+    headers.Authorization = `Bearer ${token}`;
   }
 
   const response = await fetch(url, {

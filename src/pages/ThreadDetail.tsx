@@ -1,41 +1,41 @@
-import { ChangeEvent, useEffect, useState } from "react";
-import CommentFilter from "../components/comment/CommentFilter";
-import ThreadDetailCard from "../components/thread/ThreadDetailCard";
-import CommentCard from "../components/comment/CommentCard";
-import { itemsSorter } from "../helpers/itemsSorter";
-import { totalUpVotes } from "../helpers/vote";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../store";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { ChangeEvent, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import CommentFilter from '../components/comment/CommentFilter';
+import ThreadDetailCard from '../components/thread/ThreadDetailCard';
+import CommentCard from '../components/comment/CommentCard';
+import { itemsSorter } from '../helpers/itemsSorter';
+import { totalUpVotes } from '../helpers/vote';
+import { AppDispatch, RootState } from '../store';
 import {
   asyncDownVoteComment,
   asyncDownVoteThread,
   asyncGetThreadDetails,
   asyncUpVoteComment,
   asyncUpVoteThread,
-} from "../store/thread/action";
-import CommentForm from "../components/comment/CommentForm";
-import { createComment } from "../utils/apis/comment";
+} from '../store/thread/action';
+import CommentForm from '../components/comment/CommentForm';
+import { createComment } from '../utils/apis/comment';
 
 const ThreadDetail = () => {
   const [refresh, setRefresh] = useState(false);
   const [sortCommentBy, setSortCommentBy] = useState<
-    "newest" | "highest_votes"
-  >("highest_votes");
+    'newest' | 'highest_votes'
+  >('highest_votes');
 
   const navigate = useNavigate();
-  const { threadId } = useParams();
+  const { threadId: paramThreadId } = useParams();
 
   const dispatch = useDispatch<AppDispatch>();
   const { auth, thread } = useSelector((state: RootState) => state);
 
   useEffect(() => {
-    dispatch(asyncGetThreadDetails(threadId as string));
-  }, [dispatch, threadId, refresh]);
+    dispatch(asyncGetThreadDetails(paramThreadId as string));
+  }, [dispatch, paramThreadId, refresh]);
 
   const upVoteHandler = (threadId: string) => {
     if (!auth.isAuthenticated) {
-      navigate("/login");
+      navigate('/login');
       return;
     }
 
@@ -48,7 +48,7 @@ const ThreadDetail = () => {
 
   const upVoteCommentHandler = (threadId: string, commentId: string) => {
     if (!auth.isAuthenticated) {
-      navigate("/login");
+      navigate('/login');
       return;
     }
 
@@ -59,7 +59,7 @@ const ThreadDetail = () => {
     if (
       targetComment &&
       !targetComment.upVotesBy.includes(auth.user?.id as string)
-    )
+    ) {
       dispatch(
         asyncUpVoteComment({
           threadId,
@@ -67,11 +67,12 @@ const ThreadDetail = () => {
           userId: auth.user?.id as string,
         }),
       );
+    }
   };
 
   const downVoteHandler = (threadId: string) => {
     if (!auth.isAuthenticated) {
-      navigate("/login");
+      navigate('/login');
       return;
     }
 
@@ -84,7 +85,7 @@ const ThreadDetail = () => {
 
   const downVoteCommentHandler = (threadId: string, commentId: string) => {
     if (!auth.isAuthenticated) {
-      navigate("/login");
+      navigate('/login');
       return;
     }
 
@@ -96,7 +97,6 @@ const ThreadDetail = () => {
       targetComment &&
       !targetComment.downVotesBy.includes(auth.user?.id as string)
     ) {
-      console.log("HIT");
       dispatch(
         asyncDownVoteComment({
           threadId,
@@ -108,11 +108,11 @@ const ThreadDetail = () => {
   };
 
   const commentSorterHandler = (e: ChangeEvent<HTMLSelectElement>) => {
-    setSortCommentBy(e.target.value as "newest" | "highest_votes");
+    setSortCommentBy(e.target.value as 'newest' | 'highest_votes');
   };
 
   const submitCommentHandler = async (content: string) => {
-    const response = await createComment(threadId!, { content });
+    const response = await createComment(paramThreadId!, { content });
 
     if (response.isError) {
       alert(response.message);
@@ -159,8 +159,8 @@ const ThreadDetail = () => {
           <h2 className="text-lg font-normal">
             <span className="font-bold">
               {thread.threadDetails.comments.length}
-            </span>{" "}
-            {thread.threadDetails.comments.length > 1 ? "comments" : "comment"}
+            </span>{' '}
+            {thread.threadDetails.comments.length > 1 ? 'comments' : 'comment'}
           </h2>
           <CommentFilter
             value={sortCommentBy}
@@ -174,7 +174,7 @@ const ThreadDetail = () => {
           )}
           {sortedComments.map((comment) => (
             <CommentCard
-              threadId={threadId as string}
+              threadId={paramThreadId as string}
               upVoteCommentHandler={upVoteCommentHandler}
               downVoteCommentHandler={downVoteCommentHandler}
               key={comment.id}

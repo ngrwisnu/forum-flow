@@ -1,12 +1,12 @@
-import Badge from "../ui/Badge";
-import Card, { CardContent, CardFooter, CardHeader } from "../ui/Card";
-import defaultImage from "../../assets/default-image.webp";
-import { truncateText } from "../../helpers/truncateText";
-import { Link } from "react-router-dom";
-import { ThreadType } from "../../types/thread";
-import { formatCreatedTime } from "../../helpers/formatCreatedTime";
-import { totalVotes } from "../../helpers/vote";
-import parse from "html-react-parser";
+import { Link } from 'react-router-dom';
+import parse from 'html-react-parser';
+import Badge from '../ui/Badge';
+import Card, { CardContent, CardFooter, CardHeader } from '../ui/Card';
+import defaultImage from '../../assets/default-image.webp';
+import { truncateText } from '../../helpers/truncateText';
+import { ThreadType } from '../../types/thread';
+import { formatCreatedTime } from '../../helpers/formatCreatedTime';
+import { totalVotes } from '../../helpers/vote';
 
 interface ThreadCardProps extends ThreadType {
   avatar?: string;
@@ -42,7 +42,7 @@ const ThreadCard = ({ avatar, name, ...thread }: ThreadCardProps) => {
             {thread.title}
           </Link>
           <div className="text-sm">
-            {parse(truncateText(thread.body))}{" "}
+            {parse(truncateText(thread.body))}{' '}
             {thread.body.length >= 250 && (
               <Link
                 to={`/threads/${thread.id}`}
@@ -56,12 +56,12 @@ const ThreadCard = ({ avatar, name, ...thread }: ThreadCardProps) => {
       </CardContent>
       <CardFooter className="mt-2 flex justify-end gap-3">
         <div className="font-light">
-          <span className="font-bold">{totalVotesValue}</span>{" "}
-          {totalVotesValue > 1 ? "votes" : "vote"}
+          <span className="font-bold">{totalVotesValue}</span>{' '}
+          {totalVotesValue > 1 ? 'votes' : 'vote'}
         </div>
         <div className="font-light">
-          <span className="font-bold">{thread.totalComments}</span>{" "}
-          {thread.totalComments > 1 ? "comments" : "comment"}
+          <span className="font-bold">{thread.totalComments}</span>{' '}
+          {thread.totalComments > 1 ? 'comments' : 'comment'}
         </div>
       </CardFooter>
     </Card>

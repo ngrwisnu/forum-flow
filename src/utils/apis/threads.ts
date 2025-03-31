@@ -1,13 +1,13 @@
-import { NewThreadRequest } from "../../types/thread";
-import { getAccessToken } from "./auths";
-import callAPI, { BASE_URL } from "./callAPI";
+import { NewThreadRequest } from '../../types/thread';
+import { getAccessToken } from './auths';
+import callAPI, { BASE_URL } from './callAPI';
 
 export async function createThread(data: NewThreadRequest) {
   const url = `${BASE_URL}/threads`;
 
   return callAPI({
     url,
-    method: "POST",
+    method: 'POST',
     token: getAccessToken(),
     body: data,
   });
@@ -34,7 +34,7 @@ export async function upVoteThread(threadId: string) {
 
   return callAPI({
     url,
-    method: "POST",
+    method: 'POST',
     token: getAccessToken(),
   });
 }
@@ -44,7 +44,7 @@ export async function downVoteThread(threadId: string) {
 
   return callAPI({
     url,
-    method: "POST",
+    method: 'POST',
     token: getAccessToken(),
   });
 }

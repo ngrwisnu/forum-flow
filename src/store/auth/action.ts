@@ -1,16 +1,16 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
+import { createAsyncThunk } from '@reduxjs/toolkit';
 import {
   login,
   register,
   updateTokenInStorage,
   updateUserDetailsInStorage,
-} from "../../utils/apis/auths";
-import { LoginRequest, SignupRequest } from "../../types/auth";
-import { getUserProfile } from "../../utils/apis/users";
-import { userLogin, userLogout } from "./slice";
+} from '../../utils/apis/auths';
+import { LoginRequest, SignupRequest } from '../../types/auth';
+import { getUserProfile } from '../../utils/apis/users';
+import { userLogin, userLogout } from './slice';
 
 export const asyncUserSignup = createAsyncThunk(
-  "auth/asyncUserSignup",
+  'auth/asyncUserSignup',
   async ({ name, email, password }: SignupRequest) => {
     const response = await register({ name, email, password });
 
@@ -23,7 +23,7 @@ export const asyncUserSignup = createAsyncThunk(
 );
 
 export const asyncUserLogin = createAsyncThunk(
-  "auth/asyncUserLogin",
+  'auth/asyncUserLogin',
   async ({ email, password }: LoginRequest, { dispatch }) => {
     const response = await login(email, password);
 
@@ -46,9 +46,9 @@ export const asyncUserLogin = createAsyncThunk(
 );
 
 export const asyncUserLogout = createAsyncThunk(
-  "auth/asyncUserLogout",
+  'auth/asyncUserLogout',
   async (_, { dispatch }) => {
-    updateTokenInStorage("");
+    updateTokenInStorage('');
     updateUserDetailsInStorage({});
 
     dispatch(userLogout());

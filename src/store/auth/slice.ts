@@ -1,6 +1,6 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { UserType } from "../../types/user";
-import { getAccessToken, getUserFromStorage } from "../../utils/apis/auths";
+import { createSlice } from '@reduxjs/toolkit';
+import { UserType } from '../../types/user';
+import { getAccessToken, getUserFromStorage } from '../../utils/apis/auths';
 
 const isAuthenticated = !!getAccessToken();
 const authenticatedUser = getUserFromStorage();
@@ -14,7 +14,7 @@ const initialState: {
 };
 
 const authSlice = createSlice({
-  name: "auth",
+  name: 'auth',
   initialState,
   reducers: {
     userLogin(state, action) {

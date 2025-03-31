@@ -1,5 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { LeaderboardResponse } from "../../types/leaderboard";
+import { createSlice } from '@reduxjs/toolkit';
+import { LeaderboardResponse } from '../../types/leaderboard';
 
 const initialState: {
   leaderboard: LeaderboardResponse;
@@ -8,7 +8,7 @@ const initialState: {
 };
 
 const leaderboardSlice = createSlice({
-  name: "leaderboard",
+  name: 'leaderboard',
   initialState,
   reducers: {
     updateLeaderboard(state, action) {

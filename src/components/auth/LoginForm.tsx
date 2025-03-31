@@ -1,15 +1,15 @@
-import { useState } from "react";
-import Button from "../ui/Button";
-import { FormItem } from "../ui/Form";
-import Input from "../ui/Input";
+import { useState } from 'react';
+import Button from '../ui/Button';
+import { FormItem } from '../ui/Form';
+import Input from '../ui/Input';
 
 interface LoginFormProps {
   onSubmit: (email: string, password: string) => void;
 }
 
 const LoginForm = ({ onSubmit }: LoginFormProps) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   return (
     <form className="flex flex-col gap-2">

@@ -1,10 +1,10 @@
-import { useSelector } from "react-redux";
-import NewThreadForm from "../components/thread/NewThreadForm";
-import { NewThreadRequest } from "../types/thread";
-import { RootState } from "../store";
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { createThread } from "../utils/apis/threads";
+import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import NewThreadForm from '../components/thread/NewThreadForm';
+import { NewThreadRequest } from '../types/thread';
+import { RootState } from '../store';
+import { createThread } from '../utils/apis/threads';
 
 const NewThread = () => {
   const { auth } = useSelector((state: RootState) => state);
@@ -12,7 +12,7 @@ const NewThread = () => {
 
   useEffect(() => {
     if (!auth.isAuthenticated) {
-      navigate("/login");
+      navigate('/login');
     }
   }, [auth.isAuthenticated, navigate]);
 
@@ -23,10 +23,10 @@ const NewThread = () => {
       alert(response.message);
     }
 
-    navigate("/");
+    navigate('/');
   };
 
-  const categories = ["general", "programming"];
+  const categories = ['general', 'programming'];
   const sortedCategories = [...categories].sort();
 
   return (

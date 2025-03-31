@@ -1,14 +1,14 @@
-import ThreadCard from "../components/thread/ThreadCard";
-import ThreadsFilter from "../components/thread/ThreadsFilter";
-import { Link, useSearchParams } from "react-router-dom";
-import { threadsFilter } from "../helpers/threadsFilter";
-import { itemsSorter } from "../helpers/itemsSorter";
-import { totalVotes } from "../helpers/vote";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../store";
-import { useEffect } from "react";
-import { asyncGetThreads } from "../store/thread/action";
-import { asyncGetUsers } from "../store/users/action";
+import { Link, useSearchParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import ThreadCard from '../components/thread/ThreadCard';
+import ThreadsFilter from '../components/thread/ThreadsFilter';
+import { threadsFilter } from '../helpers/threadsFilter';
+import { itemsSorter } from '../helpers/itemsSorter';
+import { totalVotes } from '../helpers/vote';
+import { AppDispatch, RootState } from '../store';
+import { asyncGetThreads } from '../store/thread/action';
+import { asyncGetUsers } from '../store/users/action';
 
 const Threads = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -21,13 +21,13 @@ const Threads = () => {
 
   const [searchParams] = useSearchParams();
 
-  const sortedByQueryParam = searchParams.get("sort") || "newest";
-  const categoryQueryParam = searchParams.get("category") || "all";
+  const sortedByQueryParam = searchParams.get('sort') || 'newest';
+  const categoryQueryParam = searchParams.get('category') || 'all';
 
   const filteredThreads = threadsFilter(thread.threads, categoryQueryParam);
   const sortedThreads = itemsSorter(
     filteredThreads,
-    sortedByQueryParam as "newest" | "highest_votes",
+    sortedByQueryParam as 'newest' | 'highest_votes',
     totalVotes,
   );
 
@@ -44,13 +44,15 @@ const Threads = () => {
         {!sortedThreads.length && (
           <p className="text-center">No results found</p>
         )}
-        {sortedThreads.map((thread) => {
-          const user = users.users.find((user) => user.id === thread.ownerId)!;
+        {sortedThreads.map((item) => {
+          const user = users.users.find(
+            (userObj) => userObj.id === item.ownerId,
+          )!;
 
           return (
             <ThreadCard
-              key={thread.id}
-              {...thread}
+              key={item.id}
+              {...item}
               avatar={user?.avatar}
               name={user?.name}
             />

@@ -1,10 +1,11 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import { hideLoading, showLoading } from 'react-redux-loading-bar';
 import {
   downVoteThread,
   getAllThreads,
   getThread,
   upVoteThread,
-} from "../../utils/apis/threads";
+} from '../../utils/apis/threads';
 import {
   abortCommentVote,
   abortThreadVote,
@@ -15,12 +16,11 @@ import {
   updateThreads,
   updateUpVote,
   updateUpVoteComment,
-} from "./slice";
-import { downVoteComment, upVoteComment } from "../../utils/apis/comment";
-import { hideLoading, showLoading } from "react-redux-loading-bar";
+} from './slice';
+import { downVoteComment, upVoteComment } from '../../utils/apis/comment';
 
 export const asyncGetThreads = createAsyncThunk(
-  "thread/asyncGetThreads",
+  'thread/asyncGetThreads',
   async (_, { dispatch }) => {
     dispatch(showLoading());
     const response = await getAllThreads();
@@ -36,7 +36,7 @@ export const asyncGetThreads = createAsyncThunk(
 );
 
 export const asyncGetThreadDetails = createAsyncThunk(
-  "thread/asyncGetThreadDetails",
+  'thread/asyncGetThreadDetails',
   async (threadId: string, { dispatch }) => {
     dispatch(showLoading());
     const response = await getThread(threadId);
@@ -51,7 +51,7 @@ export const asyncGetThreadDetails = createAsyncThunk(
 );
 
 export const asyncUpVoteThread = createAsyncThunk(
-  "thread/asyncUpVoteThread",
+  'thread/asyncUpVoteThread',
   async (
     { threadId, userId }: { threadId: string; userId: string },
     { dispatch },
@@ -63,13 +63,13 @@ export const asyncUpVoteThread = createAsyncThunk(
     if (response.isError) {
       alert(response.message);
 
-      dispatch(abortThreadVote({ type: "up-vote", userId }));
+      dispatch(abortThreadVote({ type: 'up-vote', userId }));
     }
   },
 );
 
 export const asyncDownVoteThread = createAsyncThunk(
-  "thread/asyncDownVoteThread",
+  'thread/asyncDownVoteThread',
   async (
     { threadId, userId }: { threadId: string; userId: string },
     { dispatch },
@@ -81,13 +81,13 @@ export const asyncDownVoteThread = createAsyncThunk(
     if (response.isError) {
       alert(response.message);
 
-      dispatch(abortThreadVote({ type: "down-vote", userId }));
+      dispatch(abortThreadVote({ type: 'down-vote', userId }));
     }
   },
 );
 
 export const asyncUpVoteComment = createAsyncThunk(
-  "thread/asyncUpVoteComment",
+  'thread/asyncUpVoteComment',
   async (
     {
       threadId,
@@ -103,13 +103,13 @@ export const asyncUpVoteComment = createAsyncThunk(
     if (response.isError) {
       alert(response.message);
 
-      dispatch(abortCommentVote({ type: "up-vote", commentId, userId }));
+      dispatch(abortCommentVote({ type: 'up-vote', commentId, userId }));
     }
   },
 );
 
 export const asyncDownVoteComment = createAsyncThunk(
-  "thread/asyncDownVoteComment",
+  'thread/asyncDownVoteComment',
   async (
     {
       threadId,
@@ -125,7 +125,7 @@ export const asyncDownVoteComment = createAsyncThunk(
     if (response.isError) {
       alert(response.message);
 
-      dispatch(abortCommentVote({ type: "down-vote", commentId, userId }));
+      dispatch(abortCommentVote({ type: 'down-vote', commentId, userId }));
     }
   },
 );

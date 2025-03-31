@@ -1,11 +1,11 @@
-import TopUsers from "../leaderboard/TopUsers";
-import { Outlet, useLocation } from "react-router-dom";
-import Header from "../header/Header.tsx";
-import { AppDispatch, RootState } from "../../store/index.ts";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { asyncGetLeaderboard } from "../../store/leaderboard/action.ts";
-import ProgressBar from "../ui/ProgressBar.tsx";
+import { Outlet, useLocation } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import TopUsers from '../leaderboard/TopUsers';
+import Header from '../header/Header.tsx';
+import { AppDispatch, RootState } from '../../store/index.ts';
+import { asyncGetLeaderboard } from '../../store/leaderboard/action.ts';
+import ProgressBar from '../ui/ProgressBar.tsx';
 
 const RootLayout = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -16,7 +16,7 @@ const RootLayout = () => {
   }, [dispatch]);
 
   const location = useLocation();
-  const isLeaderboardPage = location.pathname === "/leaderboards";
+  const isLeaderboardPage = location.pathname === '/leaderboards';
 
   const sortedLeaderboard = [...leaderboard.leaderboard].sort(
     (a, b) => b.score - a.score,
