@@ -46,11 +46,12 @@ const SignUpForm = ({ onSubmit }: SignUpFormProps) => {
       </FormItem>
       <Button
         type="button"
-        onClick={() => onSubmit({
-          name,
-          email,
-          password,
-        })
+        onClick={() =>
+          onSubmit({
+            name,
+            email,
+            password,
+          })
         }
         className="btn-primary mt-4 w-full"
       >

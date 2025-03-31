@@ -12,14 +12,14 @@ const Editor = ({
   editorHandler,
   ...props
 }: EditorProps) => (
-    <div
-      ref={editorRef}
-      className="rich-editor min-h-60 rounded-lg border border-slate-200 p-4"
-      data-placeholder={placeholder}
-      onBlur={editorHandler}
-      contentEditable
-      {...props}
-    ></div>
+  <div
+    ref={editorRef}
+    className="rich-editor min-h-60 rounded-lg border border-slate-200 p-4"
+    data-placeholder={placeholder}
+    onBlur={editorHandler}
+    contentEditable
+    {...props}
+  ></div>
 );
 
 export default Editor;

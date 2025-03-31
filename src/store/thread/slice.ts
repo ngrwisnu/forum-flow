@@ -36,9 +36,10 @@ const threadSlice = createSlice({
       );
 
       if (state.threadDetails) {
-        state.threadDetails.downVotesBy = state.threadDetails.downVotesBy.filter(
-          (user) => user !== action.payload,
-        );
+        state.threadDetails.downVotesBy =
+          state.threadDetails.downVotesBy.filter(
+            (user) => user !== action.payload,
+          );
       }
 
       if (!isAlreadyUpVote) {
@@ -61,7 +62,8 @@ const threadSlice = createSlice({
       }
     },
     abortThreadVote(state, action) {
-      const voteType = action.payload.type === 'up-vote' ? 'upVotesBy' : 'downVotesBy';
+      const voteType =
+        action.payload.type === 'up-vote' ? 'upVotesBy' : 'downVotesBy';
 
       if (state.threadDetails) {
         state.threadDetails[voteType] = state.threadDetails[voteType].filter(
@@ -73,8 +75,9 @@ const threadSlice = createSlice({
       const targetComment = state.threadDetails?.comments.find(
         (comment) => comment.id === action.payload.commentId,
       );
-      const isAlreadyUpVote = targetComment
-        && targetComment.upVotesBy.includes(action.payload.userId);
+      const isAlreadyUpVote =
+        targetComment &&
+        targetComment.upVotesBy.includes(action.payload.userId);
 
       // remove user from down vote list
       if (state.threadDetails && targetComment) {
@@ -92,8 +95,9 @@ const threadSlice = createSlice({
       const targetComment = state.threadDetails?.comments.find(
         (comment) => comment.id === action.payload.commentId,
       );
-      const isAlreadyUpVote = targetComment
-        && targetComment.downVotesBy.includes(action.payload.userId);
+      const isAlreadyUpVote =
+        targetComment &&
+        targetComment.downVotesBy.includes(action.payload.userId);
 
       // remove user from up vote list
       if (state.threadDetails && targetComment) {
@@ -111,7 +115,8 @@ const threadSlice = createSlice({
       const targetComment = state.threadDetails?.comments.find(
         (comment) => comment.id === action.payload.commentId,
       );
-      const voteType = action.payload.type === 'up-vote' ? 'upVotesBy' : 'downVotesBy';
+      const voteType =
+        action.payload.type === 'up-vote' ? 'upVotesBy' : 'downVotesBy';
 
       if (state.threadDetails && targetComment) {
         targetComment[voteType] = targetComment[voteType].filter(

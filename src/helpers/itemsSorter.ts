@@ -8,7 +8,8 @@ export const itemsSorter = <T extends ThreadType | CommentType>(
 ): T[] => {
   if (sortedBy === 'newest') {
     return [...data].sort(
-      (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+      (a, b) =>
+        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
     );
   }
 

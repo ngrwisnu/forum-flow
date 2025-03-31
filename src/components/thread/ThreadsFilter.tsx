@@ -9,7 +9,7 @@ const ThreadsFilter = ({ categories }: { categories: string[] }) => {
   const sortedCategories = [...categories].sort();
 
   const sortedBy = searchParams.get('sort') || 'newest';
-  const category = searchParams.get('category') || 'all';
+  const selectedCategory = searchParams.get('category') || 'all';
 
   const filterHandler = (e: ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -32,7 +32,11 @@ const ThreadsFilter = ({ categories }: { categories: string[] }) => {
         </div>
         <div className="flex w-fit items-center gap-2">
           <div className="flex-none">Filtered by: </div>
-          <Select name="category" value={category} onChange={filterHandler}>
+          <Select
+            name="category"
+            value={selectedCategory}
+            onChange={filterHandler}
+          >
             <option value="all">All categories</option>
             {sortedCategories.map((category) => (
               <option value={category} key={category}>

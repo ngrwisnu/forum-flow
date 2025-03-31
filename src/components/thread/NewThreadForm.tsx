@@ -14,7 +14,7 @@ interface NewThreadFormProps {
 
 const NewThreadForm = ({ categories, onSubmit }: NewThreadFormProps) => {
   const [title, setTitle] = useState('');
-  const [category, setCategory] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('');
   const [body, setBody] = useState('');
 
   const editorBlurHandler = (e: ChangeEvent<HTMLDivElement>) => {
@@ -41,7 +41,7 @@ const NewThreadForm = ({ categories, onSubmit }: NewThreadFormProps) => {
           id="category"
           className="select-ghost border border-slate-200"
           name="category"
-          onChange={(e) => setCategory(e.target.value)}
+          onChange={(e) => setSelectedCategory(e.target.value)}
         >
           <option disabled selected>
             Select the category
@@ -61,11 +61,12 @@ const NewThreadForm = ({ categories, onSubmit }: NewThreadFormProps) => {
         <Button
           type="button"
           className="btn-secondary ml-auto"
-          onClick={() => onSubmit({
-            title,
-            category,
-            body,
-          })
+          onClick={() =>
+            onSubmit({
+              title,
+              category: selectedCategory,
+              body,
+            })
           }
         >
           Post thread

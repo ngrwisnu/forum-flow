@@ -6,9 +6,9 @@ const Button = ({
   children,
   ...props
 }: ButtonHTMLAttributes<HTMLButtonElement>) => (
-    <button className={cn('btn', className)} {...props}>
-      {children}
-    </button>
+  <button className={cn('btn', className)} {...props}>
+    {children}
+  </button>
 );
 
 export default Button;
