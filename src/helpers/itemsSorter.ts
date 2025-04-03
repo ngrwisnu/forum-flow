@@ -3,7 +3,7 @@ import { ThreadType } from '../types/thread';
 
 export const itemsSorter = <T extends ThreadType | CommentType>(
   data: T[],
-  sortedBy: 'newest' | 'highest_votes',
+  sortedBy?: 'newest' | 'highest_votes',
   votesCounter?: (totalUpVote: number, totalDownVote: number) => number,
 ): T[] => {
   if (sortedBy === 'newest') {
