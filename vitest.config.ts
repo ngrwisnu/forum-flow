@@ -10,8 +10,8 @@ export default defineConfig({
         'src/helpers/**.ts': {
           functions: 90,
         },
-        'src/store/**.ts': {
-          functions: 50,
+        'src/store/**': {
+          functions: 100,
         },
       },
     },
