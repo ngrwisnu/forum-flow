@@ -28,12 +28,10 @@ describe('asyncGetLeaderboard', () => {
       },
     ];
 
-    (getLeaderboard as Mock).mockImplementation(() =>
-      Promise.resolve({
-        isError: false,
-        data: { leaderboards: mockData },
-      }),
-    );
+    (getLeaderboard as Mock).mockReturnValue({
+      isError: false,
+      data: { leaderboards: mockData },
+    });
 
     await asyncGetLeaderboard()(mockDispatch, () => ({}), undefined);
 
@@ -51,9 +49,7 @@ describe('asyncGetLeaderboard', () => {
       message: 'fetching failed',
     };
 
-    (getLeaderboard as Mock).mockImplementation(() =>
-      Promise.resolve(failedFetch),
-    );
+    (getLeaderboard as Mock).mockReturnValue(failedFetch);
 
     await asyncGetLeaderboard()(mockDispatch, () => ({}), undefined);
 
