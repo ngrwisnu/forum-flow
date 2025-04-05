@@ -27,10 +27,11 @@ export const asyncGetThreads = createAsyncThunk(
 
     if (response.isError) {
       alert(response.message);
+    } else {
+      dispatch(updateThreads(response.data.threads));
+      dispatch(addThreadCategories(response.data.threads));
     }
 
-    dispatch(updateThreads(response.data.threads));
-    dispatch(addThreadCategories(response.data.threads));
     dispatch(hideLoading());
   },
 );
@@ -43,9 +44,10 @@ export const asyncGetThreadDetails = createAsyncThunk(
 
     if (response.isError) {
       alert(response.message);
+    } else {
+      dispatch(updateThreadDetails(response.data.detailThread));
     }
 
-    dispatch(updateThreadDetails(response.data.detailThread));
     dispatch(hideLoading());
   },
 );

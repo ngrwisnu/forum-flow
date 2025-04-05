@@ -1,3 +1,4 @@
+/* v8 ignore start */
 import { configureStore } from '@reduxjs/toolkit';
 import { loadingBarReducer } from 'react-redux-loading-bar';
 import authReducer from './auth/slice';
@@ -19,3 +20,5 @@ export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;
 
 export default store;
+
+/* v8 ignore stop */

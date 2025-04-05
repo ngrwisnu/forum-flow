@@ -8,6 +8,7 @@ import {
 import { asyncUserLogin, asyncUserLogout, asyncUserSignup } from '../action';
 import { getUserProfile } from '../../../utils/apis/users';
 import { userLogin, userLogout } from '../slice';
+import { errorResponse } from '../../../../__tests__/helpers/errorResponse';
 
 vi.mock('../../../utils/apis/auths');
 vi.mock('../../../utils/apis/users');
@@ -49,12 +50,9 @@ describe('authThunk', () => {
     });
 
     test('should trigger the window alert', async () => {
-      const errorResponse = {
-        isError: true,
-        message: 'Signup failed',
-      };
+      const error = errorResponse('Signup failed');
 
-      (register as Mock).mockReturnValue(errorResponse);
+      (register as Mock).mockReturnValue(error);
 
       const result = await asyncUserSignup({
         name: 'User1',
@@ -62,7 +60,7 @@ describe('authThunk', () => {
         password: 'wrong123',
       })(mockDispatch, () => ({}), undefined);
 
-      expect(window.alert).toHaveBeenCalledWith(errorResponse.message);
+      expect(window.alert).toHaveBeenCalledWith(error.message);
       expect(result.payload).toBeUndefined();
     });
   });
@@ -92,40 +90,34 @@ describe('authThunk', () => {
     });
 
     test('should trigger window alert if login fails', async () => {
-      const errorResponse = {
-        isError: true,
-        message: 'Login failed',
-      };
+      const error = errorResponse('Login failed');
 
-      (login as Mock).mockReturnValue(errorResponse);
+      (login as Mock).mockReturnValue(error);
 
       await asyncUserLogin({
         email: 'fail@example.com',
         password: 'wrong',
       })(mockDispatch, () => ({}), undefined);
 
-      expect(window.alert).toHaveBeenCalledWith(errorResponse.message);
+      expect(window.alert).toHaveBeenCalledWith(error.message);
     });
 
     test('should trigger window alert if user profile fetch fails', async () => {
-      const errorResponse = {
-        isError: true,
-        message: 'Profile fetch failed',
-      };
+      const error = errorResponse('Profile fetch failed');
 
       (login as Mock).mockReturnValue({
         isError: false,
         data: { token: 'token123' },
       });
 
-      (getUserProfile as Mock).mockReturnValue(errorResponse);
+      (getUserProfile as Mock).mockReturnValue(error);
 
       await asyncUserLogin({
         email: 'test@example.com',
         password: 'pass123',
       })(mockDispatch, () => ({}), undefined);
 
-      expect(window.alert).toHaveBeenCalledWith(errorResponse.message);
+      expect(window.alert).toHaveBeenCalledWith(error.message);
     });
   });
 
