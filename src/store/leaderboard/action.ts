@@ -11,9 +11,10 @@ export const asyncGetLeaderboard = createAsyncThunk(
 
     if (response.isError) {
       alert(response.message);
+    } else {
+      dispatch(updateLeaderboard(response.data.leaderboards));
     }
 
-    dispatch(updateLeaderboard(response.data.leaderboards));
     dispatch(hideLoading());
   },
 );
