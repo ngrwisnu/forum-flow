@@ -5,4 +5,4 @@ export interface UserType {
   avatar?: string;
 }
 
-export type UserResponse = UserType[];
+export type UsersResponse = UserType[];

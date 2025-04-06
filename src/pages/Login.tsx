@@ -1,9 +1,24 @@
-import { Link } from "react-router-dom";
-import LoginForm from "../components/auth/LoginForm";
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import LoginForm from '../components/auth/LoginForm';
+import { asyncUserLogin } from '../store/auth/action';
+import { AppDispatch, RootState } from '../store';
 
 const Login = () => {
+  const navigate = useNavigate();
+
+  const { auth } = useSelector((state: RootState) => state);
+  const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    if (auth.isAuthenticated) {
+      navigate('/');
+    }
+  }, [auth.isAuthenticated, navigate]);
+
   const loginHandler = (email: string, password: string) => {
-    console.log({ email, password });
+    dispatch(asyncUserLogin({ email, password }));
   };
 
   return (
@@ -12,7 +27,7 @@ const Login = () => {
         <h1 className="mb-6 text-center text-4xl font-bold">Login</h1>
         <LoginForm onSubmit={loginHandler} />
         <div className="mt-6 text-slate-500">
-          Don't have an account?{" "}
+          Don't have an account?{' '}
           <Link to="/register" className="text-primary">
             Sign up
           </Link>

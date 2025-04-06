@@ -1,35 +1,58 @@
-import { Triangle } from "lucide-react";
-import defaultImage from "../../assets/default-image.webp";
-import Card, { CardContent, CardHeader } from "../../components/ui/Card";
-import Button from "../ui/Button";
-import { DetailThreadType } from "../../types/thread";
-import { formatCreatedTime } from "../../helpers/formatCreatedTime";
-import { totalUpVotes } from "../../helpers/vote";
-import CommentForm from "../comment/CommentForm";
+import { Triangle } from 'lucide-react';
+import parse from 'html-react-parser';
+import defaultImage from '../../assets/default-image.webp';
+import Card, { CardContent, CardHeader } from '../../components/ui/Card';
+import Button from '../ui/Button';
+import { ThreadDetailsType } from '../../types/thread';
+import { formatCreatedTime } from '../../helpers/formatCreatedTime';
+import { totalUpVotes } from '../../helpers/vote';
+import { getUserFromStorage } from '../../utils/apis/auths';
+
+interface ThreadDetailCardProps extends ThreadDetailsType {
+  upVoteThreadHandler: (threadId: string) => void;
+  downVoteThreadHandler: (threadId: string) => void;
+}
 
 const ThreadDetailCard = ({
+  id,
   title,
   body,
   owner,
   createdAt,
   upVotesBy,
   downVotesBy,
-}: DetailThreadType) => {
-  const submitCommentHandler = (content: string) => {
-    console.log(content);
-  };
+  upVoteThreadHandler,
+  downVoteThreadHandler,
+}: ThreadDetailCardProps) => {
+  const authUser = getUserFromStorage();
 
   return (
-    <Card className="grid grid-cols-[max-content_1fr] p-4">
+    <Card className="grid grid-cols-[max-content_1fr]">
       <div className="col-start-1 col-end-auto flex flex-col items-center justify-center gap-2 pr-4">
-        <Button className="flex size-8 items-center justify-center rounded-full border border-slate-400 bg-transparent p-0 text-slate-400">
-          <Triangle size={14} />
+        <Button
+          className={`${upVotesBy.includes(authUser?.id as string) ? 'bg-primary/80 border-primary text-white' : 'border-slate-400 bg-transparent text-slate-400'} flex size-8 items-center justify-center rounded-full border p-0`}
+          onClick={() => upVoteThreadHandler(id)}
+        >
+          <Triangle
+            size={14}
+            fill={
+              upVotesBy.includes(authUser?.id as string) ? '#ffffff' : 'none'
+            }
+          />
         </Button>
         <span className="font-semibold">
           {totalUpVotes(upVotesBy?.length, downVotesBy?.length)}
         </span>
-        <Button className="flex size-8 rotate-180 items-center justify-center rounded-full border border-slate-400 bg-transparent p-0 text-slate-400">
-          <Triangle size={14} />
+        <Button
+          className={`${downVotesBy.includes(authUser?.id as string) ? 'bg-primary/80 border-primary text-white' : 'border-slate-400 bg-transparent text-slate-400'} flex size-8 rotate-180 items-center justify-center rounded-full border p-0`}
+          onClick={() => downVoteThreadHandler(id)}
+        >
+          <Triangle
+            size={14}
+            fill={
+              downVotesBy.includes(authUser?.id as string) ? '#ffffff' : 'none'
+            }
+          />
         </Button>
       </div>
 
@@ -42,7 +65,7 @@ const ThreadDetailCard = ({
             <div className="text-sm">{owner.name}</div>
           </div>
           <div className="text-sm text-slate-400">
-            posted{" "}
+            posted{' '}
             <span className="font-medium text-slate-900">
               {formatCreatedTime(createdAt!)}
             </span>
@@ -50,12 +73,8 @@ const ThreadDetailCard = ({
         </CardHeader>
         <CardContent className="ml-2 py-2">
           <h1 className="mb-2 text-xl font-bold">{title}</h1>
-          <p>{body}</p>
+          <div>{parse(body)}</div>
         </CardContent>
-      </div>
-      <div className="col-start-1 -col-end-1 border-t border-slate-200 py-3">
-        <h2 className="my-3 text-lg">Write your comment</h2>
-        <CommentForm onSubmit={submitCommentHandler} />
       </div>
     </Card>
   );

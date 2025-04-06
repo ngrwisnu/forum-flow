@@ -1,4 +1,4 @@
-import { UserType } from "./user";
+import { UserType } from './user';
 
 export interface CommentType {
   id: string;
@@ -7,4 +7,8 @@ export interface CommentType {
   upVotesBy: string[];
   downVotesBy: string[];
   owner: Partial<UserType>;
+}
+
+export interface CreateCommentRequest {
+  content: string;
 }

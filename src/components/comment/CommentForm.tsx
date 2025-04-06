@@ -1,21 +1,32 @@
-import { ChangeEvent, useState } from "react";
-import Button from "../ui/Button";
-import Editor from "../ui/Editor";
+import { ChangeEvent, useRef, useState } from 'react';
+import Button from '../ui/Button';
+import Editor from '../ui/Editor';
 
 interface CommentFormProps {
   onSubmit: (content: string) => void;
 }
 
 const CommentForm = ({ onSubmit }: CommentFormProps) => {
-  const [content, setContent] = useState("");
+  const [content, setContent] = useState('');
+  const editorRef = useRef<HTMLDivElement>(null);
 
   const editorBlurHandler = (e: ChangeEvent<HTMLDivElement>) => {
     setContent(e.target.innerHTML);
   };
 
+  const postCommentHandler = () => {
+    onSubmit(content);
+
+    if (editorRef.current) {
+      editorRef.current.innerHTML = '';
+    }
+    setContent('');
+  };
+
   return (
     <form>
       <Editor
+        editorRef={editorRef}
         placeholder="Write your comment here..."
         editorHandler={editorBlurHandler}
       />
@@ -23,7 +34,7 @@ const CommentForm = ({ onSubmit }: CommentFormProps) => {
         <Button
           type="button"
           className="btn-secondary"
-          onClick={() => onSubmit(content)}
+          onClick={postCommentHandler}
         >
           Post comment
         </Button>

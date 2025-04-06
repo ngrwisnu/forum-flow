@@ -1,10 +1,23 @@
-import { Link } from "react-router-dom";
-import SignUpForm from "../components/auth/SignUpForm";
-import { SignupRequest } from "../types/auth";
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import SignUpForm from '../components/auth/SignUpForm';
+import { SignupRequest } from '../types/auth';
+import type { AppDispatch } from '../store';
+import { asyncUserSignup } from '../store/auth/action';
 
 const Signup = () => {
-  const signUpHandler = (data: SignupRequest) => {
-    console.log(data);
+  const navigate = useNavigate();
+
+  const dispatch = useDispatch<AppDispatch>();
+
+  const signUpHandler = async (data: SignupRequest) => {
+    const response = await dispatch(asyncUserSignup(data)).unwrap();
+
+    if (!response) {
+      return;
+    }
+
+    navigate('/login');
   };
 
   return (
@@ -15,7 +28,7 @@ const Signup = () => {
         </h1>
         <SignUpForm onSubmit={signUpHandler} />
         <div className="mt-6 text-slate-500">
-          Have an account?{" "}
+          Have an account?{' '}
           <Link to="/login" className="text-primary">
             Login
           </Link>

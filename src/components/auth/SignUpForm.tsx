@@ -1,17 +1,17 @@
-import { useState } from "react";
-import Button from "../ui/Button";
-import { FormItem } from "../ui/Form";
-import Input from "../ui/Input";
-import { SignupRequest } from "../../types/auth";
+import { useState } from 'react';
+import Button from '../ui/Button';
+import { FormItem } from '../ui/Form';
+import Input from '../ui/Input';
+import { SignupRequest } from '../../types/auth';
 
 interface SignUpFormProps {
   onSubmit: ({ name, email, password }: SignupRequest) => void;
 }
 
 const SignUpForm = ({ onSubmit }: SignUpFormProps) => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   return (
     <form className="flex flex-col gap-2">

@@ -1,11 +1,11 @@
-import { ChangeEvent, useState } from "react";
-import { capitalizedFirstLetter } from "../../helpers/capitalizeFirstLetter";
-import Button from "../ui/Button";
-import Editor from "../ui/Editor";
-import { FormItem } from "../ui/Form";
-import Input from "../ui/Input";
-import Select from "../ui/Select";
-import { NewThreadRequest } from "../../types/thread";
+import { ChangeEvent, useState } from 'react';
+import { capitalizedFirstLetter } from '../../helpers/capitalizeFirstLetter';
+import Button from '../ui/Button';
+import Editor from '../ui/Editor';
+import { FormItem } from '../ui/Form';
+import Input from '../ui/Input';
+import Select from '../ui/Select';
+import { NewThreadRequest } from '../../types/thread';
 
 interface NewThreadFormProps {
   categories: string[];
@@ -13,9 +13,9 @@ interface NewThreadFormProps {
 }
 
 const NewThreadForm = ({ categories, onSubmit }: NewThreadFormProps) => {
-  const [title, setTitle] = useState("");
-  const [category, setCategory] = useState("");
-  const [body, setBody] = useState("");
+  const [title, setTitle] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('');
+  const [body, setBody] = useState('');
 
   const editorBlurHandler = (e: ChangeEvent<HTMLDivElement>) => {
     setBody(e.target.innerHTML);
@@ -41,7 +41,7 @@ const NewThreadForm = ({ categories, onSubmit }: NewThreadFormProps) => {
           id="category"
           className="select-ghost border border-slate-200"
           name="category"
-          onChange={(e) => setCategory(e.target.value)}
+          onChange={(e) => setSelectedCategory(e.target.value)}
         >
           <option disabled selected>
             Select the category
@@ -64,7 +64,7 @@ const NewThreadForm = ({ categories, onSubmit }: NewThreadFormProps) => {
           onClick={() =>
             onSubmit({
               title,
-              category,
+              category: selectedCategory,
               body,
             })
           }

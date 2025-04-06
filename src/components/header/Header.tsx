@@ -1,9 +1,25 @@
-import { Link } from "react-router-dom";
-import logo from "../../assets/horizontal.png";
-import defaultImage from "../../assets/default-image.webp";
-import { AlignLeft } from "lucide-react";
+import { Link } from 'react-router-dom';
+import { AlignLeft } from 'lucide-react';
+import { useDispatch } from 'react-redux';
+import logo from '../../assets/horizontal.png';
+import defaultImage from '../../assets/default-image.webp';
+import type { UserType } from '../../types/user';
+import Button from '../ui/Button';
+import { AppDispatch } from '../../store';
+import { asyncUserLogout } from '../../store/auth/action';
 
-const Header = () => {
+interface HeaderProps {
+  user: UserType | null;
+  isAuthenticated: boolean;
+}
+
+const Header = ({ user, isAuthenticated }: HeaderProps) => {
+  const dispatch = useDispatch<AppDispatch>();
+
+  const logoutHandler = () => {
+    dispatch(asyncUserLogout());
+  };
+
   return (
     <header className="navbar bg-base-100 shadow-sm">
       <div className="flex flex-1 items-center justify-start">
@@ -39,16 +55,25 @@ const Header = () => {
       </div>
 
       <div className="flex flex-1 items-center justify-end gap-5">
-        <div className="flex items-center gap-3">
-          <div className="">John Doe</div>
-          <div className="size-8 overflow-hidden rounded-full">
-            <img src={defaultImage} alt="profile-pic" />
+        {isAuthenticated && (
+          <div className="flex items-center gap-3">
+            <div>{user?.name}</div>
+            <div className="size-8 overflow-hidden rounded-full">
+              <img src={user?.avatar || defaultImage} alt="profile-pic" />
+            </div>
           </div>
-        </div>
+        )}
         <div className="grow-0">
-          <Link to="/login" className="btn btn-outline">
-            Login
-          </Link>
+          {!isAuthenticated && (
+            <Link to="/login" className="btn btn-outline">
+              Login
+            </Link>
+          )}
+          {isAuthenticated && (
+            <Button className="btn-outline" onClick={logoutHandler}>
+              Logout
+            </Button>
+          )}
         </div>
       </div>
     </header>
