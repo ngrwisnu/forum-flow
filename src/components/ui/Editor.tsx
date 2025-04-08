@@ -18,6 +18,7 @@ const Editor = ({
     data-placeholder={placeholder}
     onBlur={editorHandler}
     contentEditable
+    data-testid="editor"
     {...props}
   ></div>
 );

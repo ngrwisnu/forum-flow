@@ -44,6 +44,7 @@ export default tseslint.config(
       'import/no-unresolved': 'off',
       'import/extensions': 'off',
       'import/prefer-default-export': 'off',
+      'import/no-extraneous-dependencies': 'off',
       'implicit-arrow-linebreak': 'off',
       'no-restricted-syntax': 'off',
       'no-alert': 'off',
@@ -54,6 +55,12 @@ export default tseslint.config(
     files: ['**/slice.ts'],
     rules: {
       'no-param-reassign': 'off',
+    },
+  },
+  {
+    files: ['**/*.test.{ts,tsx}'],
+    rules: {
+      'no-undef': 'off',
     },
   },
 );
