@@ -13,6 +13,7 @@
     "test:cov": "vitest run --coverage",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
+    "e2e": "cypress run",
     "cy:open": "cypress open"
   },
   "dependencies": {
