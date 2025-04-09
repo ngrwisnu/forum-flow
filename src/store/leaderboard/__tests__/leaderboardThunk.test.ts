@@ -1,3 +1,8 @@
+/*
+- should be able to dispatch loading, API call, updateLeaderboard, and hideLoading
+- should trigger window alert if isError is true
+*/
+
 import { describe, test, expect, vi, afterEach, Mock } from 'vitest';
 import { showLoading, hideLoading } from 'react-redux-loading-bar';
 import { asyncGetLeaderboard } from '../action';

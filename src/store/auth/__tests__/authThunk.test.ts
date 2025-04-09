@@ -1,3 +1,15 @@
+/*
+** asyncUserSignup
+- should return the user data
+- should trigger the window alert
+** asyncUserLogin
+- should be able to perform login and fetch profile successfully
+- should trigger window alert if login fails
+- should trigger window alert if user profile fetch fails
+** asyncUserLogout
+- should be able to clear storage and dispatch logout
+*/
+
 import { describe, test, expect, vi, afterEach, Mock } from 'vitest';
 import {
   login,

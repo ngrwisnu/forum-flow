@@ -1,3 +1,15 @@
+/*
+- updateThreads should replace the old threads state
+- updateThreadDetails should update the state of threadDetails
+- addThreadCategories should be able to collect unique categories
+- updateUpVote should be able to add up-vote and removes down-vote if necessary
+- updateDownVote should be able to add down-vote and removes up-vote if necessary
+- abortThreadVote removes user from correct vote type
+- updateUpVoteComment should be able to add up-vote and removes down-vote on a comment
+- updateDownVoteComment should be able to add down-vote and removes up-vote on a comment
+- abortCommentVote should be able to remove user from correct vote type in a comment
+*/
+
 import { describe, test, expect } from 'vitest';
 import threadReducer, {
   updateThreads,

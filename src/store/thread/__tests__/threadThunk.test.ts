@@ -1,3 +1,24 @@
+/*
+* asyncGetThreads
+- should be able to dispatch actions
+- should trigger window alert on error response
+* asyncGetThreadDetails
+- should be able to dispatch actions
+- should trigger window alert on error response
+* asyncUpVoteThread
+- should handle successful dispatch upvote
+- should revert vote and trigger window alert on error
+* asyncDownVoteThread
+- should handle successful dispatch downvote
+- should revert downvote and trigger window alert on error
+* asyncUpVoteComment
+- should handle successful dispatch upvote comment
+- should revert upvote comment and trigger window alert on error
+* asyncDownVoteComment
+- should handle successful dispatch downvote comment
+- should revert downvote comment and trigger window alert on error
+*/
+
 import { describe, test, expect, vi, afterEach, Mock } from 'vitest';
 import { hideLoading, showLoading } from 'react-redux-loading-bar';
 import {

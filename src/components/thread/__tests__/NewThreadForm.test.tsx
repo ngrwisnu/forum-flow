@@ -1,3 +1,9 @@
+/*
+- should render all form input fields
+- should render the list of categories
+- should call onSubmit when post thread button is clicked
+*/
+
 import { render, screen, fireEvent } from '@testing-library/react';
 import NewThreadForm from '../NewThreadForm';
 

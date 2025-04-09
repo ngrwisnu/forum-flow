@@ -1,3 +1,9 @@
+/*
+- should render user ranking with score and name
+- should render default image if avatar is missing
+- has a link to see all leaderboards
+*/
+
 import { cleanup, render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import TopUsers from '../TopUsers';

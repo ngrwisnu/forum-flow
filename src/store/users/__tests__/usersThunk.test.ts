@@ -1,3 +1,8 @@
+/*
+- should be able to dispatch updateUsers
+- should trigger window alert if isError is true
+*/
+
 import { describe, test, expect, vi, afterEach, Mock } from 'vitest';
 import { getAllUsers } from '../../../utils/apis/users';
 import { asyncGetUsers } from '../action';
