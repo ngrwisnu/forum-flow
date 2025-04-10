@@ -4,6 +4,7 @@ import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
 import tseslint from 'typescript-eslint';
 import eslintConfigPrettier from 'eslint-config-prettier/flat';
+import pluginChaiFriendly from 'eslint-plugin-chai-friendly';
 import pluginCypress from 'eslint-plugin-cypress/flat';
 import { FlatCompat } from '@eslint/eslintrc';
 import path from 'path';
@@ -24,6 +25,7 @@ export default tseslint.config(
       ...tseslint.configs.recommended,
       ...compat.extends('eslint-config-airbnb-base'),
       pluginCypress.configs.recommended,
+      pluginChaiFriendly.configs.recommendedFlat,
       eslintConfigPrettier,
     ],
     files: ['**/*.{ts,tsx}'],
@@ -42,6 +44,7 @@ export default tseslint.config(
         'warn',
         { allowConstantExport: true },
       ],
+      'cypress/no-unnecessary-waiting': 'off',
       'no-unused-vars': 'off',
       '@typescript-eslint/no-unused-vars': 'error',
       'import/no-unresolved': 'off',
