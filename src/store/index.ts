@@ -5,6 +5,7 @@ import authReducer from './auth/slice';
 import threadReducer from './thread/slice';
 import usersReducer from './users/slice';
 import leaderboardReducer from './leaderboard/slice';
+import alertReducer from './alert/slice';
 
 const store = configureStore({
   reducer: {
@@ -13,6 +14,7 @@ const store = configureStore({
     users: usersReducer,
     leaderboard: leaderboardReducer,
     loadingBar: loadingBarReducer,
+    alert: alertReducer,
   },
 });
 
