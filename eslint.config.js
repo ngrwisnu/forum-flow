@@ -50,7 +50,6 @@ export default tseslint.config(
       'import/no-extraneous-dependencies': 'off',
       'implicit-arrow-linebreak': 'off',
       'no-restricted-syntax': 'off',
-      'no-alert': 'off',
       'linebreak-style': ['error', 'unix'],
     },
   },
