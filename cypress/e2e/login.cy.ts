@@ -61,7 +61,8 @@ describe('Login cy', () => {
 
     cy.get('@loginButton').click();
 
-    cy.get('div:has([role="alert"])', { timeout: 6000 })
+    cy.get('[role="alert"]', { timeout: 6000 })
+      .parent()
       .as('alert')
       .should('have.class', 'top-0');
 
