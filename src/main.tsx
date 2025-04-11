@@ -11,35 +11,41 @@ import Threads from './pages/Threads.tsx';
 import ThreadDetail from './pages/ThreadDetail.tsx';
 import NewThread from './pages/NewThread.tsx';
 import store from './store/index.ts';
+import AppLayout from './components/layouts/AppLayout.tsx';
 
 const router = createBrowserRouter([
   {
-    path: 'register',
-    element: <Signup />,
-  },
-  {
-    path: 'login',
-    element: <Login />,
-  },
-  {
-    path: '/',
-    element: <RootLayout />,
+    element: <AppLayout />,
     children: [
       {
-        index: true,
-        element: <Threads />,
+        path: 'register',
+        element: <Signup />,
       },
       {
-        path: 'threads/:threadId',
-        element: <ThreadDetail />,
+        path: 'login',
+        element: <Login />,
       },
       {
-        path: 'threads/create',
-        element: <NewThread />,
-      },
-      {
-        path: 'leaderboards',
-        element: <Leaderboards />,
+        path: '/',
+        element: <RootLayout />,
+        children: [
+          {
+            index: true,
+            element: <Threads />,
+          },
+          {
+            path: 'threads/:threadId',
+            element: <ThreadDetail />,
+          },
+          {
+            path: 'threads/create',
+            element: <NewThread />,
+          },
+          {
+            path: 'leaderboards',
+            element: <Leaderboards />,
+          },
+        ],
       },
     ],
   },

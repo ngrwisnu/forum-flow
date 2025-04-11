@@ -8,6 +8,7 @@ import {
 import { LoginRequest, SignupRequest } from '../../types/auth';
 import { getUserProfile } from '../../utils/apis/users';
 import { userLogin, userLogout } from './slice';
+import { openAlert } from '../alert/slice';
 
 export const asyncUserSignup = createAsyncThunk(
   'auth/asyncUserSignup',
@@ -28,7 +29,8 @@ export const asyncUserLogin = createAsyncThunk(
     const response = await login(email, password);
 
     if (response.isError) {
-      alert(response.message);
+      dispatch(openAlert({ message: response.message }));
+      return;
     }
 
     updateTokenInStorage(response.data.token);
@@ -36,7 +38,8 @@ export const asyncUserLogin = createAsyncThunk(
     const userData = await getUserProfile();
 
     if (userData.isError) {
-      alert(userData.message);
+      dispatch(openAlert({ message: userData.message }));
+      return;
     }
 
     updateUserDetailsInStorage(userData.data.user);
