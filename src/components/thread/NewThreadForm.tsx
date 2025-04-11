@@ -57,10 +57,7 @@ const NewThreadForm = ({ categories, onSubmit }: NewThreadFormProps) => {
       </FormItem>
       <FormItem>
         <label htmlFor="body">Body</label>
-        <Editor
-          editorHandler={editorBlurHandler}
-          data-testid="newThread-body"
-        />
+        <Editor editorHandler={editorBlurHandler} />
       </FormItem>
       <div className="flex justify-end">
         <Button

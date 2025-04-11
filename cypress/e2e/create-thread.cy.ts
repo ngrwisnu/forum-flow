@@ -9,7 +9,7 @@
 * assert that url includes: '/threads/create'
 - find input with data-testid: 'newThread-title'
 - find input with data-testid: 'newThread-category'
-- find input with data-testid: 'newThread-body'
+- find input with data-testid: 'editor'
 - find button with data-testid: 'newThread-button'
 - simulate typing
     - with title
@@ -62,7 +62,7 @@ describe('POST NewThread cy', () => {
       .as('newCategory')
       .select(threadData.category);
     // eslint-disable-next-line cypress/unsafe-to-chain-command
-    cy.get('[data-testid="newThread-body"]')
+    cy.get('[data-testid="editor"]')
       .as('newBody')
       .focus()
       .type(threadData.body)
@@ -89,7 +89,7 @@ describe('POST NewThread cy', () => {
       .as('newCategory')
       .select(threadData.category);
     // eslint-disable-next-line cypress/unsafe-to-chain-command
-    cy.get('[data-testid="newThread-body"]')
+    cy.get('[data-testid="editor"]')
       .as('newBody')
       .focus()
       .type(threadData.body)
