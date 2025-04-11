@@ -1,7 +1,14 @@
+/*
+- should be able to dispatch updateUsers
+- should dispatch openAlert if isError is true
+*/
+
 import { describe, test, expect, vi, afterEach, Mock } from 'vitest';
 import { getAllUsers } from '../../../utils/apis/users';
 import { asyncGetUsers } from '../action';
 import { updateUsers } from '../slice';
+import { openAlert } from '../../alert/slice';
+import { errorResponse } from '../../../../__tests__/helpers/errorResponse';
 
 vi.mock('../../../utils/apis/users', () => ({
   getAllUsers: vi.fn(),
@@ -39,19 +46,17 @@ describe('asyncGetUsers', () => {
     expect(mockDispatch).toHaveBeenCalledWith(updateUsers(mockData));
   });
 
-  test('should trigger window alert if isError is true', async () => {
+  test('should dispatch openAlert if isError is true', async () => {
     const mockDispatch = vi.fn();
-    window.alert = vi.fn();
 
-    const failedFetch = {
-      isError: true,
-      message: 'fetching failed',
-    };
+    const error = errorResponse('fetching failed');
 
-    (getAllUsers as Mock).mockReturnValue(failedFetch);
+    (getAllUsers as Mock).mockReturnValue(error);
 
     await asyncGetUsers()(mockDispatch, () => ({}), undefined);
 
-    expect(window.alert).toHaveBeenCalledWith(failedFetch.message);
+    expect(mockDispatch).toHaveBeenCalledWith(
+      openAlert({ message: error.message }),
+    );
   });
 });

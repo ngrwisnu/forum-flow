@@ -32,6 +32,7 @@ const NewThreadForm = ({ categories, onSubmit }: NewThreadFormProps) => {
           value={title}
           className="input-ghost border border-slate-200"
           placeholder="Enter the title"
+          data-testid="newThread-title"
           onChange={(e) => setTitle(e.target.value)}
         />
       </FormItem>
@@ -41,6 +42,7 @@ const NewThreadForm = ({ categories, onSubmit }: NewThreadFormProps) => {
           id="category"
           className="select-ghost border border-slate-200"
           name="category"
+          data-testid="newThread-category"
           onChange={(e) => setSelectedCategory(e.target.value)}
         >
           <option disabled selected>
@@ -61,6 +63,7 @@ const NewThreadForm = ({ categories, onSubmit }: NewThreadFormProps) => {
         <Button
           type="button"
           className="btn-secondary ml-auto"
+          data-testid="newThread-button"
           onClick={() =>
             onSubmit({
               title,

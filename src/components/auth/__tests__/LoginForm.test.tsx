@@ -1,3 +1,9 @@
+/*
+- should render email and password input fields
+- should update the input values when typing
+- should call onSubmit when login button is clicked
+*/
+
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import LoginForm from '../LoginForm';

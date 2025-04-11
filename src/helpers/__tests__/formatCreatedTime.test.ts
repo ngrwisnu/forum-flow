@@ -1,3 +1,13 @@
+/*
+- should return "just now"
+- should return "a second ago"
+- should return "a minute ago"
+- should return "2 hours ago"
+- should return "2 days ago"
+- should return "a month ago"
+- should return "a year ago"
+*/
+
 import { describe, expect, test } from 'vitest';
 import { formatCreatedTime } from '../formatCreatedTime';
 

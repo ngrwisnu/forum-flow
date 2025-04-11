@@ -1,3 +1,12 @@
+/*
+- should render the comment content and user info
+- should call upVoteCommentHandler when upvote button is clicked
+- should call downVoteCommentHandler when downvote button is clicked
+- should update the style of upvote button if user has voted
+- should update the style of downvote button if user has voted
+- should render the correct vote count
+*/
+
 import { render, screen, fireEvent } from '@testing-library/react';
 import CommentCard from '../CommentCard';
 
@@ -12,13 +21,13 @@ vi.mock('../../../helpers/formatCreatedTime', () => ({
   formatCreatedTime: () => `a day ago`,
 }));
 vi.mock('html-react-parser', () => ({
-  default: (html: string) => html,
+  default: () => 'a parsed string',
 }));
 
 const baseProps = {
   threadId: 'thread-1',
   id: 'comment-1',
-  content: 'This is a test comment',
+  content: '<p>This is a test comment</p>',
   owner: {
     id: 'user-2',
     name: 'User2',
@@ -39,7 +48,7 @@ describe('CommentCard', () => {
   test('should render the comment content and user info', () => {
     render(<CommentCard {...baseProps} />);
 
-    expect(screen.getByText('This is a test comment')).toBeInTheDocument();
+    expect(screen.getByText('a parsed string')).toBeInTheDocument();
     expect(screen.getByText(baseProps.owner.name)).toBeInTheDocument();
     expect(screen.getByAltText('profile')).toHaveAttribute(
       'src',
@@ -74,7 +83,7 @@ describe('CommentCard', () => {
     );
   });
 
-  test('should display vote highlight if user has voted', () => {
+  test('should update the style of upvote button if user has voted', () => {
     const votedProps = {
       ...baseProps,
       upVotesBy: ['user-1'],
@@ -89,7 +98,7 @@ describe('CommentCard', () => {
     expect(upButton.querySelector('svg')?.getAttribute('fill')).toBe('#ffffff');
   });
 
-  test('should display down vote highlight if user has voted', () => {
+  test('should update the style of downvote button if user has voted', () => {
     const votedProps = {
       ...baseProps,
       upVotesBy: [],

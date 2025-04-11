@@ -20,6 +20,7 @@ const LoginForm = ({ onSubmit }: LoginFormProps) => {
           value={email}
           placeholder="example@email.com"
           type="email"
+          data-testid="login-email"
           onChange={(e) => setEmail(e.target.value)}
         />
       </FormItem>
@@ -29,6 +30,7 @@ const LoginForm = ({ onSubmit }: LoginFormProps) => {
           id="password"
           type="password"
           value={password}
+          data-testid="login-password"
           onChange={(e) => setPassword(e.target.value)}
         />
       </FormItem>
@@ -36,6 +38,7 @@ const LoginForm = ({ onSubmit }: LoginFormProps) => {
         type="button"
         onClick={() => onSubmit(email, password)}
         className="btn-primary mt-4 w-full"
+        data-testid="login-button"
       >
         Login
       </Button>

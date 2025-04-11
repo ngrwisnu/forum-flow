@@ -18,6 +18,7 @@ import {
   updateUpVoteComment,
 } from './slice';
 import { downVoteComment, upVoteComment } from '../../utils/apis/comment';
+import { openAlert } from '../alert/slice';
 
 export const asyncGetThreads = createAsyncThunk(
   'thread/asyncGetThreads',
@@ -26,7 +27,7 @@ export const asyncGetThreads = createAsyncThunk(
     const response = await getAllThreads();
 
     if (response.isError) {
-      alert(response.message);
+      dispatch(openAlert({ message: response.message }));
     } else {
       dispatch(updateThreads(response.data.threads));
       dispatch(addThreadCategories(response.data.threads));
@@ -43,7 +44,7 @@ export const asyncGetThreadDetails = createAsyncThunk(
     const response = await getThread(threadId);
 
     if (response.isError) {
-      alert(response.message);
+      dispatch(openAlert({ message: response.message }));
     } else {
       dispatch(updateThreadDetails(response.data.detailThread));
     }
@@ -63,7 +64,7 @@ export const asyncUpVoteThread = createAsyncThunk(
     const response = await upVoteThread(threadId);
 
     if (response.isError) {
-      alert(response.message);
+      dispatch(openAlert({ message: response.message }));
 
       dispatch(abortThreadVote({ type: 'up-vote', userId }));
     }
@@ -81,7 +82,7 @@ export const asyncDownVoteThread = createAsyncThunk(
     const response = await downVoteThread(threadId);
 
     if (response.isError) {
-      alert(response.message);
+      dispatch(openAlert({ message: response.message }));
 
       dispatch(abortThreadVote({ type: 'down-vote', userId }));
     }
@@ -103,7 +104,7 @@ export const asyncUpVoteComment = createAsyncThunk(
     const response = await upVoteComment(threadId, commentId);
 
     if (response.isError) {
-      alert(response.message);
+      dispatch(openAlert({ message: response.message }));
 
       dispatch(abortCommentVote({ type: 'up-vote', commentId, userId }));
     }
@@ -125,7 +126,7 @@ export const asyncDownVoteComment = createAsyncThunk(
     const response = await downVoteComment(threadId, commentId);
 
     if (response.isError) {
-      alert(response.message);
+      dispatch(openAlert({ message: response.message }));
 
       dispatch(abortCommentVote({ type: 'down-vote', commentId, userId }));
     }

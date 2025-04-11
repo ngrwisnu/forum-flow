@@ -1,3 +1,12 @@
+/*
+* totalVotes
+- should return the sum of upVote and downVote
+- should throw error when the input is negative value
+* totalUpVotes
+- should return the difference between upVote and downVote
+- should throw error when the input is negative value
+*/
+
 import { describe, test, expect } from 'vitest';
 import { totalVotes, totalUpVotes } from '../vote';
 

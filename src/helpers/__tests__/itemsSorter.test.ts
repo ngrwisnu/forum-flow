@@ -1,3 +1,9 @@
+/*
+- should sort items by newest
+- should sort items by highest votes
+- should be able to reverse the items
+*/
+
 import { describe, expect, test } from 'vitest';
 import { itemsSorter } from '../itemsSorter';
 

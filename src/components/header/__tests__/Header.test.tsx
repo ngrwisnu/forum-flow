@@ -1,3 +1,11 @@
+/*
+- should render logo and navigation links
+- should show login button when not authenticated
+- should show user name, avatar, and logout button when authenticated
+- should show user with default image
+- should dispatch logout action when logout button is clicked
+*/
+
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { BrowserRouter } from 'react-router-dom';

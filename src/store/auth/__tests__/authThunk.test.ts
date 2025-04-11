@@ -1,3 +1,15 @@
+/*
+** asyncUserSignup
+- should return the user data
+- should dispath the openAlert
+** asyncUserLogin
+- should be able to perform login and fetch profile successfully
+- should dispath the openAlert if login fails
+- should dispath the openAlert if user profile fetch fails
+** asyncUserLogout
+- should be able to clear storage and dispatch logout
+*/
+
 import { describe, test, expect, vi, afterEach, Mock } from 'vitest';
 import {
   login,
@@ -9,6 +21,7 @@ import { asyncUserLogin, asyncUserLogout, asyncUserSignup } from '../action';
 import { getUserProfile } from '../../../utils/apis/users';
 import { userLogin, userLogout } from '../slice';
 import { errorResponse } from '../../../../__tests__/helpers/errorResponse';
+import { openAlert } from '../../alert/slice';
 
 vi.mock('../../../utils/apis/auths');
 vi.mock('../../../utils/apis/users');
@@ -21,7 +34,6 @@ const mockData = {
 
 describe('authThunk', () => {
   const mockDispatch = vi.fn();
-  window.alert = vi.fn();
 
   afterEach(() => {
     vi.restoreAllMocks();
@@ -49,7 +61,7 @@ describe('authThunk', () => {
       });
     });
 
-    test('should trigger the window alert', async () => {
+    test('should dispath the openAlert', async () => {
       const error = errorResponse('Signup failed');
 
       (register as Mock).mockReturnValue(error);
@@ -60,7 +72,9 @@ describe('authThunk', () => {
         password: 'wrong123',
       })(mockDispatch, () => ({}), undefined);
 
-      expect(window.alert).toHaveBeenCalledWith(error.message);
+      expect(mockDispatch).toHaveBeenCalledWith(
+        openAlert({ message: error.message }),
+      );
       expect(result.payload).toBeUndefined();
     });
   });
@@ -89,7 +103,7 @@ describe('authThunk', () => {
       expect(mockDispatch).toHaveBeenCalledWith(userLogin(mockData));
     });
 
-    test('should trigger window alert if login fails', async () => {
+    test('should dispath the openAlert if login fails', async () => {
       const error = errorResponse('Login failed');
 
       (login as Mock).mockReturnValue(error);
@@ -99,10 +113,12 @@ describe('authThunk', () => {
         password: 'wrong',
       })(mockDispatch, () => ({}), undefined);
 
-      expect(window.alert).toHaveBeenCalledWith(error.message);
+      expect(mockDispatch).toHaveBeenCalledWith(
+        openAlert({ message: error.message }),
+      );
     });
 
-    test('should trigger window alert if user profile fetch fails', async () => {
+    test('should dispath the openAlert if user profile fetch fails', async () => {
       const error = errorResponse('Profile fetch failed');
 
       (login as Mock).mockReturnValue({
@@ -117,7 +133,9 @@ describe('authThunk', () => {
         password: 'pass123',
       })(mockDispatch, () => ({}), undefined);
 
-      expect(window.alert).toHaveBeenCalledWith(error.message);
+      expect(mockDispatch).toHaveBeenCalledWith(
+        openAlert({ message: error.message }),
+      );
     });
   });
 
