@@ -11,6 +11,7 @@
     "format": "prettier --write .",
     "test": "vitest run",
     "test:cov": "vitest run --coverage",
+    "ci:e2e": "start-server-and-test dev http://localhost:5173 e2e",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
@@ -55,6 +56,7 @@
     "jsdom": "^26.0.0",
     "prettier": "^3.5.3",
     "prettier-plugin-tailwindcss": "^0.6.11",
+    "start-server-and-test": "^2.0.11",
     "storybook": "8.6.12",
     "tailwind-merge": "^3.0.2",
     "typescript": "~5.7.2",
