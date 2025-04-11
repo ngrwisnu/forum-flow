@@ -1,3 +1,9 @@
+/*
+- should render all leaderboard rows correctly with names and scores
+- should be start from index 4
+- should show the default avatar if none is provided
+*/
+
 import { cleanup, render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import LeaderboardsTable from '../LeaderboardsTable';

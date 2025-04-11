@@ -1,3 +1,9 @@
+/*
+- should return all threads when keyword is "all"
+- should return threads filtered by category
+- should return an empty array if no threads match the category
+*/
+
 import { describe, expect, test } from 'vitest';
 import { threadsFilter } from '../threadsFilter';
 import { ThreadsResponse } from '../../types/thread';
@@ -30,11 +36,13 @@ describe('threadsFilter', () => {
 
   test('should return all threads when keyword is "all"', () => {
     const result = threadsFilter(mockThreads, 'all');
+
     expect(result).toEqual(mockThreads);
   });
 
   test('should return threads filtered by category', () => {
     const result = threadsFilter(mockThreads, 'general');
+
     expect(result).toEqual([
       {
         id: '1',
@@ -52,6 +60,7 @@ describe('threadsFilter', () => {
 
   test('should return an empty array if no threads match the category', () => {
     const result = threadsFilter(mockThreads, 'notexist');
+
     expect(result).toEqual([]);
   });
 });

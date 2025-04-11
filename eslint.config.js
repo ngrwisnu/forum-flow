@@ -4,6 +4,8 @@ import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
 import tseslint from 'typescript-eslint';
 import eslintConfigPrettier from 'eslint-config-prettier/flat';
+import pluginChaiFriendly from 'eslint-plugin-chai-friendly';
+import pluginCypress from 'eslint-plugin-cypress/flat';
 import { FlatCompat } from '@eslint/eslintrc';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -22,6 +24,8 @@ export default tseslint.config(
       js.configs.recommended,
       ...tseslint.configs.recommended,
       ...compat.extends('eslint-config-airbnb-base'),
+      pluginCypress.configs.recommended,
+      pluginChaiFriendly.configs.recommendedFlat,
       eslintConfigPrettier,
     ],
     files: ['**/*.{ts,tsx}'],
@@ -32,6 +36,7 @@ export default tseslint.config(
     plugins: {
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
+      cypress: pluginCypress,
     },
     rules: {
       ...reactHooks.configs.recommended.rules,
@@ -39,6 +44,7 @@ export default tseslint.config(
         'warn',
         { allowConstantExport: true },
       ],
+      'cypress/no-unnecessary-waiting': 'off',
       'no-unused-vars': 'off',
       '@typescript-eslint/no-unused-vars': 'error',
       'import/no-unresolved': 'off',
@@ -47,7 +53,6 @@ export default tseslint.config(
       'import/no-extraneous-dependencies': 'off',
       'implicit-arrow-linebreak': 'off',
       'no-restricted-syntax': 'off',
-      'no-alert': 'off',
       'linebreak-style': ['error', 'unix'],
     },
   },

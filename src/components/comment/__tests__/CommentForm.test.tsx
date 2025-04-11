@@ -1,3 +1,8 @@
+/*
+- should render the Editor and post comment button
+- should call onSubmit with content from editor and clears it
+*/
+
 import { render, screen, fireEvent } from '@testing-library/react';
 import CommentForm from '../CommentForm';
 

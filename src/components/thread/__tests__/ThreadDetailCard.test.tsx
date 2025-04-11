@@ -1,3 +1,13 @@
+/*
+- should render title, body, author, and posted time
+- should render default avatar if none is provided
+- should display the vote count
+- should call upVoteThreadHandler when upvote button is clicked
+- should call downVoteThreadHandler when downvote button is clicked
+- should show active vote button styles if user has upvoted
+- should show active vote button styles if user has downvoted
+*/
+
 import { render, screen, fireEvent } from '@testing-library/react';
 import ThreadDetailCard from '../ThreadDetailCard';
 
@@ -45,7 +55,7 @@ describe('ThreadDetailCard', () => {
     vi.clearAllMocks();
   });
 
-  test('should render title, body, author, and timestamp', () => {
+  test('should render title, body, author, and posted time', () => {
     render(<ThreadDetailCard {...baseThreadDetails} />);
 
     expect(screen.getByText(baseThreadDetails.title)).toBeInTheDocument();

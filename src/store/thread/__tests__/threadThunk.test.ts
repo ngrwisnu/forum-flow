@@ -1,3 +1,24 @@
+/*
+* asyncGetThreads
+- should be able to dispatch actions
+- should dispatch openAlert on error response
+* asyncGetThreadDetails
+- should be able to dispatch actions
+- should dispatch openAlert on error response
+* asyncUpVoteThread
+- should handle successful dispatch upvote
+- should revert vote and dispatch openAlert on error
+* asyncDownVoteThread
+- should handle successful dispatch downvote
+- should revert downvote and dispatch openAlert on error
+* asyncUpVoteComment
+- should handle successful dispatch upvote comment
+- should revert upvote comment and dispatch openAlert on error
+* asyncDownVoteComment
+- should handle successful dispatch downvote comment
+- should revert downvote comment and dispatch openAlert on error
+*/
+
 import { describe, test, expect, vi, afterEach, Mock } from 'vitest';
 import { hideLoading, showLoading } from 'react-redux-loading-bar';
 import {
@@ -27,6 +48,7 @@ import {
 } from '../slice';
 import { errorResponse } from '../../../../__tests__/helpers/errorResponse';
 import { downVoteComment, upVoteComment } from '../../../utils/apis/comment';
+import { openAlert } from '../../alert/slice';
 
 vi.mock('../../../utils/apis/threads');
 vi.mock('../../../utils/apis/comment');
@@ -47,7 +69,6 @@ const dummyThread = {
 
 describe('threadThunk', () => {
   const mockDispatch = vi.fn();
-  window.alert = vi.fn();
 
   afterEach(() => {
     vi.restoreAllMocks();
@@ -71,14 +92,16 @@ describe('threadThunk', () => {
       expect(mockDispatch).toHaveBeenCalledWith(hideLoading());
     });
 
-    test('should trigger window alert on error response', async () => {
+    test('should dispatch openAlert on error response', async () => {
       const error = errorResponse('Failed to fetch');
 
       (getAllThreads as Mock).mockResolvedValue(error);
 
       await asyncGetThreads()(mockDispatch, () => ({}), undefined);
 
-      expect(window.alert).toHaveBeenCalledWith(error.message);
+      expect(mockDispatch).toHaveBeenCalledWith(
+        openAlert({ message: error.message }),
+      );
     });
   });
 
@@ -104,7 +127,7 @@ describe('threadThunk', () => {
       expect(mockDispatch).toHaveBeenCalledWith(hideLoading());
     });
 
-    test('should trigger window alert on error response', async () => {
+    test('should dispatch openAlert on error response', async () => {
       const error = errorResponse('Thread not found');
 
       (getThread as Mock).mockResolvedValue(error);
@@ -115,7 +138,9 @@ describe('threadThunk', () => {
         undefined,
       );
 
-      expect(window.alert).toHaveBeenCalledWith(error.message);
+      expect(mockDispatch).toHaveBeenCalledWith(
+        openAlert({ message: error.message }),
+      );
     });
   });
 
@@ -135,7 +160,7 @@ describe('threadThunk', () => {
       );
     });
 
-    test('should revert vote and trigger window alert on error', async () => {
+    test('should revert vote and dispatch openAlert on error', async () => {
       const error = errorResponse('Vote failed');
 
       (upVoteThread as Mock).mockResolvedValue(error);
@@ -147,7 +172,9 @@ describe('threadThunk', () => {
       );
 
       expect(mockDispatch).toHaveBeenCalledWith(updateUpVote('user-1'));
-      expect(window.alert).toHaveBeenCalledWith(error.message);
+      expect(mockDispatch).toHaveBeenCalledWith(
+        openAlert({ message: error.message }),
+      );
       expect(mockDispatch).toHaveBeenCalledWith(
         abortThreadVote({ type: 'up-vote', userId: 'user-1' }),
       );
@@ -170,7 +197,7 @@ describe('threadThunk', () => {
       );
     });
 
-    test('should revert downvote and trigger window alert on error', async () => {
+    test('should revert downvote and dispatch openAlert on error', async () => {
       const error = errorResponse('Vote failed');
 
       (downVoteThread as Mock).mockResolvedValue(error);
@@ -182,7 +209,9 @@ describe('threadThunk', () => {
       );
 
       expect(mockDispatch).toHaveBeenCalledWith(updateDownVote('user-1'));
-      expect(window.alert).toHaveBeenCalledWith(error.message);
+      expect(mockDispatch).toHaveBeenCalledWith(
+        openAlert({ message: error.message }),
+      );
       expect(mockDispatch).toHaveBeenCalledWith(
         abortThreadVote({ type: 'down-vote', userId: 'user-1' }),
       );
@@ -216,7 +245,7 @@ describe('threadThunk', () => {
       );
     });
 
-    test('should revert upvote comment and trigger window alert on error', async () => {
+    test('should revert upvote comment and dispatch openAlert on error', async () => {
       const error = errorResponse('Vote failed');
 
       (upVoteComment as Mock).mockResolvedValue(error);
@@ -229,7 +258,9 @@ describe('threadThunk', () => {
           userId: props.userId,
         }),
       );
-      expect(window.alert).toHaveBeenCalledWith(error.message);
+      expect(mockDispatch).toHaveBeenCalledWith(
+        openAlert({ message: error.message }),
+      );
       expect(mockDispatch).toHaveBeenCalledWith(
         abortCommentVote({
           type: 'up-vote',
@@ -267,7 +298,7 @@ describe('threadThunk', () => {
       );
     });
 
-    test('should revert downvote comment and trigger window alert on error', async () => {
+    test('should revert downvote comment and dispatch openAlert on error', async () => {
       const error = errorResponse('Vote error');
 
       (downVoteComment as Mock).mockResolvedValue(error);
@@ -280,7 +311,9 @@ describe('threadThunk', () => {
           userId: props.userId,
         }),
       );
-      expect(window.alert).toHaveBeenCalledWith(error.message);
+      expect(mockDispatch).toHaveBeenCalledWith(
+        openAlert({ message: error.message }),
+      );
       expect(mockDispatch).toHaveBeenCalledWith(
         abortCommentVote({
           type: 'down-vote',

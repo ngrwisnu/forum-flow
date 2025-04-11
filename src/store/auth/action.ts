@@ -12,11 +12,11 @@ import { openAlert } from '../alert/slice';
 
 export const asyncUserSignup = createAsyncThunk(
   'auth/asyncUserSignup',
-  async ({ name, email, password }: SignupRequest) => {
+  async ({ name, email, password }: SignupRequest, { dispatch }) => {
     const response = await register({ name, email, password });
 
     if (response.isError) {
-      alert(response.message);
+      dispatch(openAlert({ message: response.message }));
     }
 
     return response.data;

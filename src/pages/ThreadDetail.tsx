@@ -16,6 +16,7 @@ import {
 } from '../store/thread/action';
 import CommentForm from '../components/comment/CommentForm';
 import { createComment } from '../utils/apis/comment';
+import { openAlert } from '../store/alert/slice';
 
 const ThreadDetail = () => {
   const [refresh, setRefresh] = useState(false);
@@ -115,7 +116,8 @@ const ThreadDetail = () => {
     const response = await createComment(paramThreadId!, { content });
 
     if (response.isError) {
-      alert(response.message);
+      dispatch(openAlert({ message: response.message }));
+      return;
     }
 
     setRefresh((prevState) => !prevState);

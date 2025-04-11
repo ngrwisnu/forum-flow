@@ -1,3 +1,10 @@
+/*
+- should render both select elements and all category options
+- should update query params when user selects a new sort option
+- should update query params when user selects a new filter option
+- should use default values if query params are not set
+*/
+
 import { fireEvent, render, screen } from '@testing-library/react';
 import { Mock } from 'vitest';
 import { useSearchParams } from 'react-router-dom';

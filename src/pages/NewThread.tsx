@@ -1,12 +1,14 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import NewThreadForm from '../components/thread/NewThreadForm';
 import { NewThreadRequest } from '../types/thread';
-import { RootState } from '../store';
+import { AppDispatch, RootState } from '../store';
 import { createThread } from '../utils/apis/threads';
+import { openAlert } from '../store/alert/slice';
 
 const NewThread = () => {
+  const dispatch = useDispatch<AppDispatch>();
   const { auth } = useSelector((state: RootState) => state);
   const navigate = useNavigate();
 
@@ -20,7 +22,8 @@ const NewThread = () => {
     const response = await createThread(data);
 
     if (response.isError) {
-      alert(response.message);
+      dispatch(openAlert({ message: response.message }));
+      return;
     }
 
     navigate('/');

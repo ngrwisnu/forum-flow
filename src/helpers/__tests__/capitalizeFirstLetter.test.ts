@@ -1,3 +1,9 @@
+/*
+- should capitalize the first letter of a single word
+- should return an empty string if input is empty
+- should not modify a word that already starts with an uppercase letter
+*/
+
 import { describe, test, expect } from 'vitest';
 import { capitalizedFirstLetter } from '../capitalizeFirstLetter';
 

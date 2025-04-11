@@ -1,3 +1,9 @@
+/*
+- should set isAuthenticated to true and update user data
+- should set isAuthenticated to false and clear user data
+- should return the old state when action type is not recognizable
+*/
+
 import { describe, test, expect, afterEach, vi, Mock } from 'vitest';
 import authReducer, { userLogin, userLogout } from '../slice';
 import { getAccessToken, getUserFromStorage } from '../../../utils/apis/auths';

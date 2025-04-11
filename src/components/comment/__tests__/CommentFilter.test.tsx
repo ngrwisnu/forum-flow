@@ -1,3 +1,9 @@
+/*
+- should render with correct default value
+- should render all filter options
+- should trigger sorterHandler when selection changes
+*/
+
 import { render, screen, fireEvent } from '@testing-library/react';
 import CommentFilter from '../CommentFilter';
 

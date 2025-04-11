@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { getAllUsers } from '../../utils/apis/users';
 import { updateUsers } from './slice';
+import { openAlert } from '../alert/slice';
 
 export const asyncGetUsers = createAsyncThunk(
   'users/asyncGetUsers',
@@ -8,7 +9,7 @@ export const asyncGetUsers = createAsyncThunk(
     const response = await getAllUsers();
 
     if (response.isError) {
-      alert(response.message);
+      dispatch(openAlert({ message: response.message }));
     }
 
     dispatch(updateUsers(response.data));

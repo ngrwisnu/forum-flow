@@ -1,8 +1,15 @@
+/*
+- should be able to dispatch loading, API call, updateLeaderboard, and hideLoading
+- should dispatch openAlert if isError is true
+*/
+
 import { describe, test, expect, vi, afterEach, Mock } from 'vitest';
 import { showLoading, hideLoading } from 'react-redux-loading-bar';
 import { asyncGetLeaderboard } from '../action';
 import { updateLeaderboard } from '../slice';
 import { getLeaderboard } from '../../../utils/apis/leaderboard';
+import { openAlert } from '../../alert/slice';
+import { errorResponse } from '../../../../__tests__/helpers/errorResponse';
 
 vi.mock('../../../utils/apis/leaderboard', () => ({
   getLeaderboard: vi.fn(),
@@ -40,21 +47,19 @@ describe('asyncGetLeaderboard', () => {
     expect(mockDispatch).toHaveBeenCalledWith(hideLoading());
   });
 
-  test('should trigger window alert if isError is true', async () => {
+  test('should dispatch openAlert if isError is true', async () => {
     const mockDispatch = vi.fn();
-    window.alert = vi.fn();
 
-    const failedFetch = {
-      isError: true,
-      message: 'fetching failed',
-    };
+    const error = errorResponse('fetching failed');
 
-    (getLeaderboard as Mock).mockReturnValue(failedFetch);
+    (getLeaderboard as Mock).mockReturnValue(error);
 
     await asyncGetLeaderboard()(mockDispatch, () => ({}), undefined);
 
     expect(mockDispatch).toHaveBeenCalledWith(showLoading());
     expect(mockDispatch).toHaveBeenCalledWith(hideLoading());
-    expect(window.alert).toHaveBeenCalledWith(failedFetch.message);
+    expect(mockDispatch).toHaveBeenCalledWith(
+      openAlert({ message: error.message }),
+    );
   });
 });

@@ -1,3 +1,8 @@
+/*
+- should handle updateLeaderboard action
+- should return the initial state if the action type is not recognizable
+*/
+
 import { describe, test, expect, beforeAll } from 'vitest';
 import leaderboardReducer, { updateLeaderboard } from '../slice';
 import { LeaderboardResponse } from '../../../types/leaderboard';

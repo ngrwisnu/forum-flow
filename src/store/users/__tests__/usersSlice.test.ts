@@ -1,3 +1,8 @@
+/*
+- should return the initial state when action type is not recognizable
+- should replace the initial state of users with the new one
+*/
+
 import { describe, test, expect } from 'vitest';
 import usersReducer, { updateUsers } from '../slice';
 

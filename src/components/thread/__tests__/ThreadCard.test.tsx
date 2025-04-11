@@ -1,3 +1,13 @@
+/*
+- should render thread info with user avatar and name
+- should render default image if avatar is not provided
+- should show correct vote and comment count text
+- should render a link to the thread detail page
+- should render "Read more" link if body is long
+- should not render "Read more" if body is short
+- should display singular "comment" and "vote"
+*/
+
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import { Mock } from 'vitest';
