@@ -31,9 +31,10 @@ describe('POST NewThread cy', () => {
     body: 'The threads content',
   };
 
-  beforeEach(() => {
+  it('should create new thread with a title', () => {
     cy.visit('/');
 
+    // Login
     cy.get('a[href="/threads/create"]').as('createThreadBtn').click();
 
     cy.url().should('include', '/login');
@@ -48,9 +49,8 @@ describe('POST NewThread cy', () => {
     cy.get('[data-testid="login-button"]').click();
 
     cy.url().should('include', '/');
-  });
+    // end of Login
 
-  it('should create new thread with a title', () => {
     cy.get('@createThreadBtn').click();
 
     cy.url().should('include', '/threads/create');
@@ -79,7 +79,26 @@ describe('POST NewThread cy', () => {
     cy.get('a').contains(threadData.title).should('be.visible');
   });
 
-  it.only('should show error alert when post new thread without title', () => {
+  it('should show error alert when post new thread without title', () => {
+    cy.visit('/');
+
+    // Login
+    cy.get('a[href="/threads/create"]').as('createThreadBtn').click();
+
+    cy.url().should('include', '/login');
+
+    cy.get('[data-testid="login-email"]')
+      .as('loginEmail')
+      .type('roxdoe@email.com');
+    cy.get('[data-testid="login-password"]')
+      .as('loginPassword')
+      .type('secret123');
+
+    cy.get('[data-testid="login-button"]').click();
+
+    cy.url().should('include', '/');
+    // end of Login
+
     cy.get('@createThreadBtn').click();
 
     cy.url().should('include', '/threads/create');
