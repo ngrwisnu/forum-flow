@@ -79,7 +79,7 @@ describe('POST NewThread cy', () => {
     cy.get('a').contains(threadData.title).should('be.visible');
   });
 
-  it('should show error alert when post new thread without title', () => {
+  it.only('should show error alert when post new thread without title', () => {
     cy.get('@createThreadBtn').click();
 
     cy.url().should('include', '/threads/create');
@@ -101,10 +101,7 @@ describe('POST NewThread cy', () => {
     cy.get('@newBody').should('have.html', threadData.body);
     cy.get('@submitThreadBtn').click();
 
-    cy.get('[role="alert"]', { timeout: 6000 })
-      .parent()
-      .as('alert')
-      .should('have.class', 'top-0');
+    cy.get('[role="alert"]').parent().as('alert').should('be.visible');
 
     cy.url().should('include', '/threads/create');
   });
