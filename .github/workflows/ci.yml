@@ -60,6 +60,3 @@ jobs:
         with:
           name: cy-screenshots
           path: cypress/screenshots
-
-        env:
-          VITE_BASE_URL: ${{ secrets.VITE_BASE_URL }}
