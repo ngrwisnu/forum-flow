@@ -51,3 +51,10 @@ jobs:
 
       - name: Run E2E tests
         run: bun run ci:e2e
+
+      - name: Screenshot on failed e2e
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: cy-screenshots
+          path: cypress/screenshots
