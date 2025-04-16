@@ -1,8 +1,8 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import './index.css';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import { createBrowserRouter, RouterProvider } from 'react-router';
 import Login from './pages/Login.tsx';
 import Signup from './pages/Signup.tsx';
 import RootLayout from './components/layouts/RootLayout.tsx';

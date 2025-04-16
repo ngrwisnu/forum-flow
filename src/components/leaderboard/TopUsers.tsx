@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import defaultImage from '../../assets/default-image.webp';
 import { LeaderboardResponse } from '../../types/leaderboard';
 
