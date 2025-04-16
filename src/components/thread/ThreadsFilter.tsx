@@ -1,5 +1,5 @@
 import { ChangeEvent } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router';
 import { capitalizedFirstLetter } from '../../helpers/capitalizeFirstLetter';
 import Select from '../ui/Select';
 

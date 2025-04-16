@@ -7,7 +7,7 @@
 
 import { fireEvent, render, screen } from '@testing-library/react';
 import { Mock } from 'vitest';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router';
 import ThreadsFilter from '../ThreadsFilter';
 
 vi.mock('../../../helpers/capitalizeFirstLetter', () => ({
@@ -17,8 +17,8 @@ vi.mock('../../../helpers/capitalizeFirstLetter', () => ({
 const mockSetSearchParams = vi.fn();
 let mockParams = new URLSearchParams();
 
-vi.mock('react-router-dom', async () => {
-  const actual = await vi.importActual('react-router-dom');
+vi.mock('react-router', async () => {
+  const actual = await vi.importActual('react-router');
   return {
     ...actual,
     useSearchParams: vi.fn(),

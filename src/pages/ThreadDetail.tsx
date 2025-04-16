@@ -1,6 +1,6 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router';
 import CommentFilter from '../components/comment/CommentFilter';
 import ThreadDetailCard from '../components/thread/ThreadDetailCard';
 import CommentCard from '../components/comment/CommentCard';

@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import parse from 'html-react-parser';
 import Badge from '../ui/Badge';
 import Card, { CardContent, CardFooter, CardHeader } from '../ui/Card';

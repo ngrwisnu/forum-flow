@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import NewThreadForm from '../components/thread/NewThreadForm';
 import { NewThreadRequest } from '../types/thread';
 import { AppDispatch, RootState } from '../store';

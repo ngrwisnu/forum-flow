@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router';
 import { useDispatch } from 'react-redux';
 import SignUpForm from '../components/auth/SignUpForm';
 import { SignupRequest } from '../types/auth';

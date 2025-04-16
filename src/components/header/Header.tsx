@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { AlignLeft } from 'lucide-react';
 import { useDispatch } from 'react-redux';
 import logo from '../../assets/horizontal.png';
